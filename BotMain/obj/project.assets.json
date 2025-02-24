@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\weare\\source\\repos\\Otus\\Bot\\BotMain\\BotMain\\BotMain.csproj",
+      "projectUniqueName": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\BotMain.csproj",
       "projectName": "BotMain",
-      "projectPath": "C:\\Users\\weare\\source\\repos\\Otus\\Bot\\BotMain\\BotMain\\BotMain.csproj",
+      "projectPath": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\BotMain.csproj",
       "packagesPath": "C:\\Users\\weare\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\weare\\source\\repos\\Otus\\Bot\\BotMain\\BotMain\\obj\\",
+      "outputPath": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,6 +33,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -51,7 +52,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net8.0": {
@@ -72,7 +73,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
