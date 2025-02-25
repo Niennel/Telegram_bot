@@ -8,8 +8,8 @@ namespace BotMain
     {
         static void Main(string[] args)
         {
-            //Console.InputEncoding = Encoding.Unicode;
-            //Console.OutputEncoding = Encoding.Unicode;
+            Console.InputEncoding  = Encoding.UTF8;
+            Console.OutputEncoding = Encoding.UTF8;
 
 
             int ver = 1;
@@ -18,17 +18,17 @@ namespace BotMain
 
             Info(ver, date);
                       
-                // Создаем строку с китайскими иероглифами и предпочитаемым шрифтом
-                StyledString chineseString = new StyledString("你好，世界！", "SimSun-ExtB");
+                //// Создаем строку с китайскими иероглифами и предпочитаемым шрифтом
+                //StyledString chineseString = new StyledString("你好，世界！", "SimSun-ExtB");
 
-                // Выводим строку в консоль
-                chineseString.PrintToConsole();
+                //// Выводим строку в консоль
+                //chineseString.PrintToConsole();
 
-                // Создаем строку с русским текстом и предпочитаемым шрифтом
-                StyledString russianString = new StyledString("Привет, мир!", "Consolas");
+                //// Создаем строку с русским текстом и предпочитаемым шрифтом
+                //StyledString russianString = new StyledString("Привет, мир!", "Consolas");
 
-                // Выводим строку в консоль
-                russianString.PrintToConsole();
+                //// Выводим строку в консоль
+                //russianString.PrintToConsole();
 
 
             //Console.WriteLine(date);
@@ -41,7 +41,7 @@ namespace BotMain
 
                 if (comand == "/start")
                 {
-                    Start(name);
+                    name=Start(name);
                 }
                 if (comand == "/help")
                 {
@@ -78,13 +78,16 @@ namespace BotMain
         }
         static string Start(string n)
         {
-            if (n == "")
-            {
-                Console.WriteLine("Как вас зовут?");
-                Console.ReadLine();
-            }
             
-                Console.WriteLine($"Здравствуйте,{n}");
+           while (n == "")
+           {
+                    Console.WriteLine("Как вас зовут?");
+                    Console.WriteLine("你叫什么名字?");
+                n = Console.ReadLine();
+           }
+            
+           Console.WriteLine($"Здравствуйте,{n}");
+           Console.WriteLine($"你好，{n}");
             return n;
         }
         static void Help(string n)
