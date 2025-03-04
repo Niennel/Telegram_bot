@@ -78,14 +78,16 @@ namespace BotMain
         }
         static string Start(string n)
         {
-            
-           while (n == "")
-           {
-                    Console.WriteLine("Как вас зовут?");
-                    Console.WriteLine("你叫什么名字?");
+
+            do
+            {
+                Console.WriteLine("Как вас зовут?");
+                Console.WriteLine("你叫什么名字?");
                 n = Console.ReadLine();
-           }
-            
+            }
+            while (n == "");
+
+
            Console.WriteLine($"Здравствуйте,{n}");
            Console.WriteLine($"你好，{n}");
             return n;
