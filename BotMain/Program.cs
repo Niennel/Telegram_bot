@@ -16,60 +16,6 @@ namespace BotMain
             Console.InputEncoding = Encoding.Unicode;
             Console.OutputEncoding = Encoding.Unicode;
 
-            //Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
-            //var gb2312 = System.Text.Encoding.GetEncoding(936);
-
-            ////string text2 = "中文 (Китайский)";
-            ////byte[] bytes = gb2312.GetBytes(text2);
-            ////string decodedText = gb2312.GetString(bytes);
-
-            ////Console.WriteLine(decodedText);
-            ////Console.OutputEncoding = Encoding.Default;
-
-            //Console.WriteLine("你好，怎么样？");
-            //Console.WriteLine("Привет, как ты?");
-            //Console.WriteLine("Hellow!!");
-
-            ////return;
-
-            //string text = "在实打实";
-            //Console.WriteLine(text);
-            //Encoding utf8 = Encoding.UTF8;
-            //byte[] utf8byte = utf8.GetBytes(text);
-            //string good = utf8.GetString(utf8byte);
-            //Console.WriteLine(good);
-
-            //Console.Write("Введите текст: ");
-            //text = Console.ReadLine();
-
-            //Console.WriteLine(text + " как ввели");
-            //byte[] ugb2312byte = gb2312.GetBytes(text);
-            //string gb2312good = gb2312.GetString(ugb2312byte);
-            //Console.WriteLine(gb2312good + " перекодировано в 936");
-
-            //int codePage = Console.OutputEncoding.CodePage;
-            //string encodingName = Console.OutputEncoding.EncodingName;
-
-            //Console.WriteLine($"Кодовая страница консоли: {codePage}");
-            //Console.WriteLine($"Имя кодировки: {encodingName}");
-
-            //string text = "在";
-
-            //// Вывод текста в кодировке UTF-8
-            //byte[] utf8Bytes = Encoding.UTF8.GetBytes(text);
-            //Console.WriteLine("UTF-8: " + Encoding.UTF8.GetString(utf8Bytes));
-
-
-            //// Вывод текста в кодировке ASCII (не поддерживает кириллицу)
-            //byte[] asciiBytes = Encoding.ASCII.GetBytes(text);
-            //Console.WriteLine("ASCII: " + Encoding.ASCII.GetString(asciiBytes));
-
-            //// Вывод текста в кодировке Unicode 
-            //byte[] unicodeBytes = Encoding.Unicode.GetBytes(text);
-            //Console.WriteLine("Unicode: " + Encoding.Unicode.GetString(unicodeBytes));
-
-            //return;
             int ver = 1;
             DateOnly date = new DateOnly(2025,02,21);
             string name = "", comand = "";
