@@ -2,10 +2,13 @@
 using System.Text;
 using System.Text.Unicode;
 using static BotMain.Echo;
+using static BotMain.TaskCountLimitException;
+
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Data;
 
 namespace BotMain
 {
@@ -15,48 +18,107 @@ namespace BotMain
         {
             Console.InputEncoding = Encoding.Unicode;
             Console.OutputEncoding = Encoding.Unicode;
-
             int ver = 1;
-            DateOnly date = new DateOnly(2025,02,21);
-            string name = "", comand = "";
+            DateOnly date = new DateOnly(2025, 02, 21);
             List<string> tasks = new List<string>();
+            string name = "", comand = "";          
 
-            Info(ver, date);
-                      
+
             while (comand != "/exit")
             {
-                string b = name == "" ? "В" : ", в";
-                Console.WriteLine($"{name}{b}ведите команду");
-                comand = Console.ReadLine();
+                try
+                {
+                    Console.Write("Введите максимально допустимое количество задач: ");
+                    var maxTasks = ParseAndValidateInt(Console.ReadLine(), 1, 100);
 
-                if (comand == "/start")
-                {
-                    name=Start(name);
+                    Console.Write("Введите максимально допустимую длину задачи: ");
+                    var maxTaskLength = ParseAndValidateInt(Console.ReadLine(), 1, 100);
+
+                    
+                    
+
+                    Info(ver, date);
+
+                    
+                    while (comand != "/exit")
+                    {
+                        try
+                        {
+                            string b = name == "" ? "В" : ", в";
+                            Console.WriteLine($"{name}{b}ведите команду");
+                            comand = Console.ReadLine();
+
+                            if (comand == "/start")
+                            {
+                                name = Start(name);
+                            }
+                            if (comand == "/help")
+                            {
+                                Help(name);
+                            }
+                            if (comand == "/info")
+                            {
+                                Info(name, ver, date);
+                            }
+                            if (name != "" && comand.Contains("/echo"))
+                            {
+                                Echo1(comand, name);
+                            }
+                            if (comand == "/addtask")
+                            {
+                                Addtask(name, ref tasks, maxTasks, maxTaskLength);
+                            }
+                            if (comand == "/showtasks")
+                            {
+                                Showtasks(name, tasks);
+                            }
+                            if (comand == "/removetask")
+                            {
+                                Removetask(name, ref tasks);
+                            }
+                        }
+                        catch (ArgumentException e)
+                        {
+                            Console.WriteLine(e.Message);
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey();
+                        }
+                        catch (TaskCountLimitException e)
+                        {
+                            Console.WriteLine(e.Message);
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey();
+                        }
+                        catch (TaskLengthLimitException e)
+                        {
+                            Console.WriteLine(e.Message);
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey();
+                        }
+                        catch (DuplicateTaskException e)
+                        {
+                            Console.WriteLine(e.Message);
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey();
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Произошла непредвиденная ошибка: ");
+                            Console.WriteLine(
+                                $"e.GetType = {e.GetType()}\ne.Message = {e.Message}\ne.StackTrace = {e.StackTrace}\ne.InnerException = {e.InnerException}");
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey();
+                        }
+                    }
+
                 }
-                if (comand == "/help")
+                catch (ArgumentException e)
                 {
-                    Help(name);
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
                 }
-                if (comand == "/info")
-                {
-                    Info(name, ver, date);
-                }
-                if (name!=""&&  comand.Contains( "/echo"))
-                {
-                    Echo1(comand,name);
-                }
-                if (comand == "/addtask")
-                {
-                    Addtask(name, ref tasks);
-                }
-                if (comand == "/showtasks")
-                {
-                    Showtasks(name, tasks);
-                }
-                if (comand == "/removetask")
-                {
-                    Removetask(name, ref tasks);
-                }
+             
             }
         }
         static void Info(int x, DateOnly d)
@@ -81,17 +143,24 @@ namespace BotMain
             else
                 Console.WriteLine($"Я{t}");
         }
-        static void Addtask(string n, ref List<string> t)
+        static void Addtask(string n, ref List<string> t, int maxCount, int maxLength)
         {
             string text = $"ведите описание задания";
             string task_in;
+            if (t.Count >= maxCount)
+                throw new TaskCountLimitException(maxCount);
+
             do
             {
                 if (n != "")
                     Console.WriteLine($"{n}, в{text}");
                 else
                     Console.WriteLine($"В{text}");
-                task_in = (Console.ReadLine());
+                task_in = ValidateString((Console.ReadLine()));
+                if (task_in.Length> maxLength)
+                    throw new TaskLengthLimitException(task_in.Length, maxLength);
+                if (t.Contains(task_in))
+                    throw new DuplicateTaskException(task_in);
             }
             while (task_in == "");
             t.Add(task_in);
@@ -185,6 +254,19 @@ namespace BotMain
             Console.WriteLine("/removetask - команда позволяющая удалять задания");
 
         }
+        private static int ParseAndValidateInt(string? str, int min, int max)
+        {
+            var isNumber = int.TryParse(str, out var number);
+            if (!isNumber || number < min || number > max)
+                throw new ArgumentException();
+            return number;
+        }
 
+        private static string ValidateString(string? str)
+        {
+            if (str != null && str.Replace(" ", "").Replace("\t", "").Length > 0)
+                return str;
+            throw new ArgumentException();
+        }
     }
 }
