@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {}
+    "net8.0": {
+      "Otus.ToDoList.ConsoleBot/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Otus.ToDoList.ConsoleBot.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Otus.ToDoList.ConsoleBot.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Otus.ToDoList.ConsoleBot/1.0.0": {
+      "type": "project",
+      "path": "../Otus.ToDoList.ConsoleBot/Otus.ToDoList.ConsoleBot.csproj",
+      "msbuildProject": "../Otus.ToDoList.ConsoleBot/Otus.ToDoList.ConsoleBot.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0": []
+    "net8.0": [
+      "Otus.ToDoList.ConsoleBot >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\weare\\.nuget\\packages\\": {},
@@ -39,7 +58,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\Otus.ToDoList.ConsoleBot\\Otus.ToDoList.ConsoleBot.csproj": {
+              "projectPath": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\Otus.ToDoList.ConsoleBot\\Otus.ToDoList.ConsoleBot.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

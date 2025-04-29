@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotMain", "BotMain\BotMain.csproj", "{914D3362-F886-49D5-9557-A59E31353E4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otus.ToDoList.ConsoleBot", "Otus.ToDoList.ConsoleBot\Otus.ToDoList.ConsoleBot.csproj", "{9DF96A2E-62CF-114B-017D-7CD1FE7D7223}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{914D3362-F886-49D5-9557-A59E31353E4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{914D3362-F886-49D5-9557-A59E31353E4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{914D3362-F886-49D5-9557-A59E31353E4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DF96A2E-62CF-114B-017D-7CD1FE7D7223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DF96A2E-62CF-114B-017D-7CD1FE7D7223}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DF96A2E-62CF-114B-017D-7CD1FE7D7223}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DF96A2E-62CF-114B-017D-7CD1FE7D7223}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A63CFAAB-7F78-4040-BB65-B004F2645B5F}
 	EndGlobalSection
 EndGlobal
