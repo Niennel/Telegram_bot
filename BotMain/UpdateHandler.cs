@@ -1,26 +1,24 @@
-﻿using Otus.ToDoList.ConsoleBot;
+﻿using BotMain.Core.DataAccess;
+using BotMain.Exceptions;
+using BotMain.Services;
+using Otus.ToDoList.ConsoleBot;
 using Otus.ToDoList.ConsoleBot.Types;
 using System;
 using System.Threading.Tasks;
-using static BotMain.ToDoItem;
+using static BotMain.Entities.ToDoItem;
 
 
 namespace BotMain
 {
-    public class UpdateHandler:IUpdateHandler
+     class UpdateHandler(IUserService _userService, IToDoService _toDoService, IToDoReportService _toDoReportService) : IUpdateHandler
     {
         int ver = 1;
         DateOnly date = new DateOnly(2025, 04, 29);
-        List<ToDoService> tasks = new List<ToDoService>();
-        private readonly IUserService _userService;
-        private readonly IToDoService _toDoService;
-        public UpdateHandler(IUserService userService, IToDoService toDoService)
-        {
-            _userService = userService;
-            _toDoService = toDoService;
-        }
-
-        public void HandleUpdateAsync(ITelegramBotClient botClient, Update update)
+        //List<ToDoService> tasks = new List<ToDoService>();
+        //private readonly IUserService _userService;
+        //private readonly IToDoService _toDoService;
+        //private readonly IToDoReportService _toDoReportService;
+    public void HandleUpdateAsync(ITelegramBotClient botClient, Update update)
         {
             try
                 {
@@ -58,10 +56,18 @@ namespace BotMain
                     }
                     if (comand == "/showalltasks")
                     {
-                       ShowAlltasks(botClient, update);
+                        ShowAlltasks(botClient, update);
+                    }
+                    if (comand == "/report")
+                        {
+                         Report(botClient, update, _toDoReportService);
+                        }
+                    if (comand == "/find")
+                    {
+                        Find(botClient, update, textToDo);
                     }
                 botClient.SendMessage(update.Message.Chat, "Введите команду");
-                }
+                    }
                 catch (ArgumentException e)
                 {
                     Console.WriteLine(e.Message);
@@ -139,7 +145,10 @@ namespace BotMain
                                  "/completetask - команда позволяющая завершать задания\n" +
                                  "/completetask - формат команды: /completetask Id_задачи\n" +
                                  "/removetask - команда позволяющая удалять задания\n"+
-                                 "/removetask - формат команды: /completetask Id_задачи\n";
+                                 "/removetask - формат команды: /completetask Id_задачи\n"+
+                                 "/report - команда возвращающая статистику польщователя\n" +
+                                 "/find - команда позволяющая искать задания по префиксу\n" +
+                                 "/find - кформат команды: /find префикс\n";
 
               string Help_text = "Для корректного отображения в консоли\n"
                                 + "1. Требуется языковой пакет Китайский\n"
@@ -291,6 +300,48 @@ namespace BotMain
             }
 
         }
+        private void Report(ITelegramBotClient botClient, Update update, IToDoReportService toDoReport)
+        {
+            //если пользователь не зарегистрирован, то ничего не происходит при вызове
+            if (_userService.GetUser(update.Message.From.Id) == null)
+            {
+                botClient.SendMessage(update.Message.Chat, $"Команда не доступна");
+                return;
+            }
 
+            var tuple = toDoReport.GetUserStats(_userService.GetUser(update.Message.From.Id)!.UserId);
+            botClient.SendMessage(update.Message.Chat,
+                $"Статистика по задачам на {tuple.generatedAt}. Всего: {tuple.total}; Завершенных: {tuple.completed}; Активных: {tuple.active};");
+        }
+        private void Find(ITelegramBotClient botClient, Update update, string pref)
+        {
+            if (_userService.GetUser(update.Message.From.Id) == null)
+            {
+                botClient.SendMessage(update.Message.Chat, $"Команда не доступна");
+                return;
+            }
+            var user = _userService.GetUser(update.Message.From.Id);
+            var _tasks = _toDoService.GetAllByUserId(user.UserId);
+            if (_tasks.Count == 0)
+            {
+                botClient.SendMessage(update.Message.Chat, $"Ваш список задач пуст");
+                return;
+            }
+
+            var _findtasks = _toDoService.Find(user,pref);
+
+            if (_findtasks.Count == 0)
+            {
+                botClient.SendMessage(update.Message.Chat, $"По заданному префиксу ничего не найдено");
+                return;
+            }
+
+            foreach (var task in _findtasks)
+            {
+                botClient.SendMessage(update.Message.Chat, $"{task.Name}- {task.CreatedAt}- {task.Id}");
+            }
+
+
+        }
     }
 }
