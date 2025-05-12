@@ -30,7 +30,8 @@ namespace BotMain
             IToDoReportService toDoReportService = new ToDoReportService(toDoRepository);
             var userService = new UserService(userRepository);
             var toDoService = new ToDoService(toDoRepository);
-            var handler = new UpdateHandler(userService, toDoService,toDoReportService);
+            using var cts = new CancellationTokenSource();
+            var handler = new UpdateHandler(userService, toDoService,toDoReportService, cts);
 
             try
             {
@@ -40,7 +41,7 @@ namespace BotMain
                 Console.Write("Введите максимально допустимую длину задачи: ");
                 maxTaskLength = ParseAndValidateInt(Console.ReadLine(), 1, 100);
 
-                botClient.StartReceiving(handler);
+                botClient.StartReceiving(handler, cts.Token);
             }
             catch (ArgumentException e)
             {

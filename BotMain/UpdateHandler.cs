@@ -10,7 +10,7 @@ using static BotMain.Entities.ToDoItem;
 
 namespace BotMain
 {
-     class UpdateHandler(IUserService _userService, IToDoService _toDoService, IToDoReportService _toDoReportService) : IUpdateHandler
+     class UpdateHandler(IUserService _userService, IToDoService _toDoService, IToDoReportService _toDoReportService, CancellationTokenSource cts) : IUpdateHandler
     {
         int ver = 1;
         DateOnly date = new DateOnly(2025, 04, 29);
@@ -18,56 +18,57 @@ namespace BotMain
         //private readonly IUserService _userService;
         //private readonly IToDoService _toDoService;
         //private readonly IToDoReportService _toDoReportService;
-    public void HandleUpdateAsync(ITelegramBotClient botClient, Update update)
+        public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken ct)
         {
             try
                 {
-                var comand = update.Message.Text.Split(" ")[0]; 
-                var textToDo = string.Join(" ", update.Message.Text.Split(" ")[1..]); 
+                   var comand = update.Message.Text.Split(" ")[0]; 
+                   var textToDo = string.Join(" ", update.Message.Text.Split(" ")[1..]); 
 
                     if (comand == "/start")
                     {
-                        Start(botClient, update);
+                        Start(botClient, update, ct);
                     }
                     if (comand == "/help")
                     {
-                        Help(botClient, update);
+                        Help(botClient, update, ct);
                     }
                     if (comand == "/info")
                     {
-                        Info(botClient, update,  ver, date);
+                        Info(botClient, update,  ver, date,ct);
                     }
             
                     if (comand == "/addtask")
                     {
-                        Addtask(botClient, update, textToDo);
+                        Addtask(botClient, update, textToDo, ct);
                     }
                     if (comand == "/showtasks")
                     {
-                        Showtasks(botClient, update);
+                        Showtasks(botClient, update, ct);
                     }
                     if (comand == "/removetask")
                     {
-                        Removetask(botClient, update, textToDo);
+                        Removetask(botClient, update, textToDo, ct);
                     }
                     if (comand == "/completetask")
                     {
-                       CompleteTask(botClient, update, textToDo);
+                       CompleteTask(botClient, update, textToDo, ct);
                     }
                     if (comand == "/showalltasks")
                     {
-                        ShowAlltasks(botClient, update);
+                        ShowAlltasks(botClient, update, ct);
                     }
                     if (comand == "/report")
-                        {
-                         Report(botClient, update, _toDoReportService);
-                        }
+                    {
+                         Report(botClient, update, _toDoReportService, ct);
+                    }
                     if (comand == "/find")
                     {
-                        Find(botClient, update, textToDo);
+                        Find(botClient, update, textToDo, ct);
                     }
-                botClient.SendMessage(update.Message.Chat, "Введите команду");
-                    }
+                   
+                  await botClient.SendMessage(update.Message.Chat, "Введите команду", ct);
+                }
                 catch (ArgumentException e)
                 {
                     Console.WriteLine(e.Message);
@@ -118,26 +119,24 @@ namespace BotMain
         //    Console.WriteLine("/exit");
         //}
         //информаци о версии
-        static void Info(ITelegramBotClient botClient, Update update,  int x, DateOnly d)
+        public async Task Info(ITelegramBotClient botClient, Update update,  int x, DateOnly d, CancellationToken cts)
         {
-            botClient.SendMessage(update.Message.Chat, $"Я {x} версия от {d} бота помошника\n");
-           
+            await botClient.SendMessage(update.Message.Chat, $"Я {x} версия от {d} бота помошника\n",cts);
         }
         //Регистрация пользователя
-        private void Start(ITelegramBotClient botClient, Update update)
+        private async Task Start(ITelegramBotClient botClient, Update update, CancellationToken cts)
         {
             _userService.RegisterUser(update.Message.From.Id, update.Message.From.Username!);
             var userNm = _userService.GetUser(update.Message.From.Id);
-            botClient.SendMessage(update.Message.Chat,
+            await botClient.SendMessage(update.Message.Chat,
                 $"Добро пожаловать, {userNm.TelegramUserName}!\n" +
-                "Введите /help для списка команд");
-       
+                "Введите /help для списка команд",cts);
+
         }
         //справка о командах
-        private void Help(ITelegramBotClient botClient, Update update)
+        private async Task Help(ITelegramBotClient botClient, Update update, CancellationToken cts)
         {
-            botClient.SendMessage(update.Message.Chat, $"Справка");
-
+            await botClient.SendMessage(update.Message.Chat, $"Справка", cts);
             string new_addtask = "/addtask - команда позволяющая добавлять задания\n"+
                                  "/addtask - формат команды: /addtask Имя_задачи\n" +
                                  "/showtasks - команда позволяющая просматривать активные задания пользователя\n" +
@@ -163,30 +162,30 @@ namespace BotMain
             {
                 Help_text = Help_text + new_addtask ;
             }
-            botClient.SendMessage(update.Message.Chat, Help_text);
+            await botClient.SendMessage(update.Message.Chat, Help_text, cts);
 
         }
         //Добавление задачи
-        private void Addtask(ITelegramBotClient botClient, Update update, string name)
+        private async Task Addtask(ITelegramBotClient botClient, Update update, string name, CancellationToken cts)
         {
             var user = _userService.GetUser(update.Message.From.Id);
             if (user == null)
             {
-                botClient.SendMessage(update.Message.Chat, $"Команда не доступна");
+                await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", cts);
                 return;
             }
 
             var task_in = _toDoService.Add(user, name);
 
-            botClient.SendMessage(update.Message.Chat, $"Задача  {task_in.Name} добавлена в список\n" +
-                                                       $"Id={task_in.Id}");
+            await botClient.SendMessage(update.Message.Chat, $"Задача  {task_in.Name} добавлена в список\n" +
+                                                      $"Id={task_in.Id}", cts);
         }
         //Просмотр активных задач
-        private void Showtasks(ITelegramBotClient botClient, Update update)
+        private async Task Showtasks(ITelegramBotClient botClient, Update update, CancellationToken cts)
         {
             if (_userService.GetUser(update.Message.From.Id) == null)
             {
-                botClient.SendMessage(update.Message.Chat, $"Команда не доступна");
+                await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", cts);
                 return;
             }
             var user = _userService.GetUser(update.Message.From.Id);
@@ -196,20 +195,20 @@ namespace BotMain
                 state = " пуст";
             string text = $"Ваш список активных задач";
 
-            botClient.SendMessage(update.Message.Chat, $"{text}{state}");
+            await botClient.SendMessage(update.Message.Chat, $"{text}{state}", cts);
 
-
+            Console.WriteLine($"Привет, меня зовут ZiLong!");
             foreach (var task in _tasks)
             {
-                botClient.SendMessage(update.Message.Chat, $"{task.Name}- {task.CreatedAt}- {task.Id}");
+                await botClient.SendMessage(update.Message.Chat, $"{task.Name}- {task.CreatedAt}- {task.Id}", cts);
             }
         }
         //Просмотр всех задач
-        private void ShowAlltasks(ITelegramBotClient botClient, Update update)
+        private async Task ShowAlltasks(ITelegramBotClient botClient, Update update, CancellationToken cts)
         {
             if (_userService.GetUser(update.Message.From.Id) == null)
             {
-                botClient.SendMessage(update.Message.Chat, $"Команда не доступна");
+                await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", cts);
                 return;
             }
             var user = _userService.GetUser(update.Message.From.Id);
@@ -219,27 +218,27 @@ namespace BotMain
                 state = " пуст";
             string text = $"Ваш список задач";
 
-            botClient.SendMessage(update.Message.Chat, $"{text}{state}");
+            await botClient.SendMessage(update.Message.Chat, $"{text}{state}", cts);
 
 
             foreach (var task in _tasks)
             {
-                botClient.SendMessage(update.Message.Chat, $"({task.State})- {task.Name}- {task.CreatedAt}- {task.Id}");
+                await botClient.SendMessage(update.Message.Chat, $"({task.State})- {task.Name}- {task.CreatedAt}- {task.Id}", cts);
             }
         }
         //Удаление задач
-        private void Removetask(ITelegramBotClient botClient, Update update, string id)
+        private async Task Removetask(ITelegramBotClient botClient, Update update, string id, CancellationToken cts)
         {
             if (_userService.GetUser(update.Message.From.Id) == null)
             {
-                botClient.SendMessage(update.Message.Chat, $"Команда не доступна");
+                await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", cts);
                 return;
             }
             var user = _userService.GetUser(update.Message.From.Id);
             var _tasks = _toDoService.GetAllByUserId(user.UserId);
             if (_tasks.Count == 0)
             {
-                botClient.SendMessage(update.Message.Chat, $"Ваш список задач пуст");
+                await botClient.SendMessage(update.Message.Chat, $"Ваш список задач пуст", cts);
                 return;
             }
 
@@ -252,31 +251,31 @@ namespace BotMain
               .ToList();
             if (taskToRemove.Count == 0)
             {
-                botClient.SendMessage(update.Message.Chat, $"Такой задачи нет");
+                await botClient.SendMessage(update.Message.Chat, $"Такой задачи нет", cts);
                 return;
             }
             _toDoService.Delete(numberToRemove);
 
             foreach (var task in _tasks.Where(task => task.Id == numberToRemove))
             {
-                botClient.SendMessage(update.Message.Chat, $"Задача {task.Name} удалена");
+                await botClient.SendMessage(update.Message.Chat, $"Задача {task.Name} удалена", cts);
             }
 
 
         }
         //Завершение задач
-        private void CompleteTask(ITelegramBotClient botClient, Update update, string id)
+        private async Task CompleteTask(ITelegramBotClient botClient, Update update, string id, CancellationToken cts)
         {
             if (_userService.GetUser(update.Message.From.Id) == null)
             {
-                botClient.SendMessage(update.Message.Chat, $"Команда не доступна");
+                await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", cts);
                 return;
             }
             var user = _userService.GetUser(update.Message.From.Id);
             var _tasks = _toDoService.GetActiveByUserId(user.UserId);
             if (_tasks.Count == 0)
             {
-                botClient.SendMessage(update.Message.Chat, $"Ваш список задач пуст");
+                await botClient.SendMessage(update.Message.Chat, $"Ваш список задач пуст", cts);
                 return;
             }
 
@@ -289,42 +288,42 @@ namespace BotMain
               .ToList();
             if (taskToRemove.Count == 0)
             {
-                botClient.SendMessage(update.Message.Chat, $"Такой задачи нет");
+                await botClient.SendMessage(update.Message.Chat, $"Такой задачи нет", cts);
                 return;
             }
             _toDoService.MarkCompleted(numberToRemove);
 
             foreach (var task in _tasks.Where(task => task.Id == numberToRemove))
             {
-                botClient.SendMessage(update.Message.Chat, $"Задача {task.Name} завершена");
+                await botClient.SendMessage(update.Message.Chat, $"Задача {task.Name} завершена", cts);
             }
 
         }
-        private void Report(ITelegramBotClient botClient, Update update, IToDoReportService toDoReport)
+        private async Task Report(ITelegramBotClient botClient, Update update, IToDoReportService toDoReport, CancellationToken cts)
         {
             //если пользователь не зарегистрирован, то ничего не происходит при вызове
             if (_userService.GetUser(update.Message.From.Id) == null)
             {
-                botClient.SendMessage(update.Message.Chat, $"Команда не доступна");
+                await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", cts);
                 return;
             }
 
             var tuple = toDoReport.GetUserStats(_userService.GetUser(update.Message.From.Id)!.UserId);
-            botClient.SendMessage(update.Message.Chat,
-                $"Статистика по задачам на {tuple.generatedAt}. Всего: {tuple.total}; Завершенных: {tuple.completed}; Активных: {tuple.active};");
+            await botClient.SendMessage(update.Message.Chat,
+            $"Статистика по задачам на {tuple.generatedAt}. Всего: {tuple.total}; Завершенных: {tuple.completed}; Активных: {tuple.active};", cts);
         }
-        private void Find(ITelegramBotClient botClient, Update update, string pref)
+        private async Task Find(ITelegramBotClient botClient, Update update, string pref, CancellationToken cts)
         {
             if (_userService.GetUser(update.Message.From.Id) == null)
             {
-                botClient.SendMessage(update.Message.Chat, $"Команда не доступна");
+                await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", cts);
                 return;
             }
             var user = _userService.GetUser(update.Message.From.Id);
             var _tasks = _toDoService.GetAllByUserId(user.UserId);
             if (_tasks.Count == 0)
             {
-                botClient.SendMessage(update.Message.Chat, $"Ваш список задач пуст");
+                await botClient.SendMessage(update.Message.Chat, $"Ваш список задач пуст", cts);
                 return;
             }
 
@@ -332,16 +331,22 @@ namespace BotMain
 
             if (_findtasks.Count == 0)
             {
-                botClient.SendMessage(update.Message.Chat, $"По заданному префиксу ничего не найдено");
+                await botClient.SendMessage(update.Message.Chat, $"По заданному префиксу ничего не найдено", cts);
                 return;
             }
 
             foreach (var task in _findtasks)
             {
-                botClient.SendMessage(update.Message.Chat, $"{task.Name}- {task.CreatedAt}- {task.Id}");
+                await botClient.SendMessage(update.Message.Chat, $"{task.Name}- {task.CreatedAt}- {task.Id}", cts);
             }
 
 
+        }
+
+        public Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken ct)
+        {
+            Console.WriteLine($"HandleError: {exception})");
+            return Task.CompletedTask;
         }
     }
 }

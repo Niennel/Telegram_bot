@@ -7,16 +7,44 @@
       "RelativeMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|solutionrelative:botmain\\updatehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|c:\\users\\weare\\source\\repos\\niennel\\telegram_bot\\botmain\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|solutionrelative:botmain\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|c:\\users\\weare\\source\\repos\\niennel\\telegram_bot\\botmain\\exceptions\\myexceptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|solutionrelative:botmain\\exceptions\\myexceptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DF96A2E-62CF-114B-017D-7CD1FE7D7223}|Otus.ToDoList.ConsoleBot\\Otus.ToDoList.ConsoleBot.csproj|c:\\users\\weare\\source\\repos\\niennel\\telegram_bot\\otus.todolist.consolebot\\consolebotclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DF96A2E-62CF-114B-017D-7CD1FE7D7223}|Otus.ToDoList.ConsoleBot\\Otus.ToDoList.ConsoleBot.csproj|solutionrelative:otus.todolist.consolebot\\consolebotclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|c:\\users\\weare\\source\\repos\\niennel\\telegram_bot\\botmain\\services\\todoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|solutionrelative:botmain\\services\\todoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|c:\\users\\weare\\source\\repos\\niennel\\telegram_bot\\botmain\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|solutionrelative:botmain\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|c:\\users\\weare\\source\\repos\\niennel\\telegram_bot\\botmain\\services\\todoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|solutionrelative:botmain\\services\\todoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|c:\\users\\weare\\source\\repos\\niennel\\telegram_bot\\botmain\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|solutionrelative:botmain\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DF96A2E-62CF-114B-017D-7CD1FE7D7223}|Otus.ToDoList.ConsoleBot\\Otus.ToDoList.ConsoleBot.csproj|c:\\users\\weare\\source\\repos\\niennel\\telegram_bot\\otus.todolist.consolebot\\itelegrambotclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DF96A2E-62CF-114B-017D-7CD1FE7D7223}|Otus.ToDoList.ConsoleBot\\Otus.ToDoList.ConsoleBot.csproj|solutionrelative:otus.todolist.consolebot\\itelegrambotclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DF96A2E-62CF-114B-017D-7CD1FE7D7223}|Otus.ToDoList.ConsoleBot\\Otus.ToDoList.ConsoleBot.csproj|c:\\users\\weare\\source\\repos\\niennel\\telegram_bot\\otus.todolist.consolebot\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{9DF96A2E-62CF-114B-017D-7CD1FE7D7223}|Otus.ToDoList.ConsoleBot\\Otus.ToDoList.ConsoleBot.csproj|solutionrelative:otus.todolist.consolebot\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|c:\\users\\weare\\source\\repos\\niennel\\telegram_bot\\botmain\\core\\dataaccess\\itodoreportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|solutionrelative:botmain\\core\\dataaccess\\itodoreportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|c:\\users\\weare\\source\\repos\\niennel\\telegram_bot\\botmain\\core\\dataaccess\\itodorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|solutionrelative:botmain\\core\\dataaccess\\itodorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|c:\\users\\weare\\source\\repos\\niennel\\telegram_bot\\botmain\\botmain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|solutionrelative:botmain\\botmain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|c:\\users\\weare\\source\\repos\\niennel\\telegram_bot\\botmain\\services\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -35,10 +63,6 @@
       "RelativeMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|solutionrelative:botmain\\infrastructure\\dataaccess\\inmemoryuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|c:\\users\\weare\\source\\repos\\niennel\\telegram_bot\\botmain\\exceptions\\myexceptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|solutionrelative:botmain\\exceptions\\myexceptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|c:\\users\\weare\\source\\repos\\niennel\\telegram_bot\\botmain\\entities\\todoreportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|solutionrelative:botmain\\entities\\todoreportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -49,18 +73,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|c:\\users\\weare\\source\\repos\\niennel\\telegram_bot\\botmain\\core\\dataaccess\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|solutionrelative:botmain\\core\\dataaccess\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|c:\\users\\weare\\source\\repos\\niennel\\telegram_bot\\botmain\\core\\dataaccess\\itodorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|solutionrelative:botmain\\core\\dataaccess\\itodorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|c:\\users\\weare\\source\\repos\\niennel\\telegram_bot\\botmain\\core\\dataaccess\\itodoreportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|solutionrelative:botmain\\core\\dataaccess\\itodoreportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|c:\\users\\weare\\source\\repos\\niennel\\telegram_bot\\botmain\\botmain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{914D3362-F886-49D5-9557-A59E31353E4E}|BotMain\\BotMain.csproj|solutionrelative:botmain\\botmain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -70,7 +82,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -86,33 +98,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "InMemoryToDoRepository.cs",
-              "DocumentMoniker": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Infrastructure\\DataAccess\\InMemoryToDoRepository.cs",
-              "RelativeDocumentMoniker": "BotMain\\Infrastructure\\DataAccess\\InMemoryToDoRepository.cs",
-              "ToolTip": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Infrastructure\\DataAccess\\InMemoryToDoRepository.cs",
-              "RelativeToolTip": "BotMain\\Infrastructure\\DataAccess\\InMemoryToDoRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T05:45:39.063Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "InMemoryUserRepository.cs",
-              "DocumentMoniker": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Infrastructure\\DataAccess\\InMemoryUserRepository.cs",
-              "RelativeDocumentMoniker": "BotMain\\Infrastructure\\DataAccess\\InMemoryUserRepository.cs",
-              "ToolTip": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Infrastructure\\DataAccess\\InMemoryUserRepository.cs",
-              "RelativeToolTip": "BotMain\\Infrastructure\\DataAccess\\InMemoryUserRepository.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAAABAAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T05:21:05.336Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 12,
               "Title": "IToDoService.cs",
               "DocumentMoniker": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Services\\IToDoService.cs",
               "RelativeDocumentMoniker": "BotMain\\Services\\IToDoService.cs",
@@ -120,12 +106,11 @@
               "RelativeToolTip": "BotMain\\Services\\IToDoService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T09:20:43.865Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T09:20:43.865Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 11,
               "Title": "IUserService.cs",
               "DocumentMoniker": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Services\\IUserService.cs",
               "RelativeDocumentMoniker": "BotMain\\Services\\IUserService.cs",
@@ -133,8 +118,7 @@
               "RelativeToolTip": "BotMain\\Services\\IUserService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T09:21:08.429Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T09:21:08.429Z"
             },
             {
               "$type": "Document",
@@ -144,14 +128,14 @@
               "RelativeDocumentMoniker": "BotMain\\Services\\ToDoService.cs",
               "ToolTip": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Services\\ToDoService.cs",
               "RelativeToolTip": "BotMain\\Services\\ToDoService.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAA9wA0AAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAAAQwCsAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-28T15:42:12.932Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "UserService.cs",
               "DocumentMoniker": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Services\\UserService.cs",
               "RelativeDocumentMoniker": "BotMain\\Services\\UserService.cs",
@@ -164,13 +148,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Program.cs",
               "RelativeDocumentMoniker": "BotMain\\Program.cs",
               "ToolTip": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Program.cs",
               "RelativeToolTip": "BotMain\\Program.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAgwAsAAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAABEAAAAAAAAAAAAQwBoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-12T07:52:54.414Z",
               "EditorCaption": ""
@@ -183,79 +167,79 @@
               "RelativeDocumentMoniker": "BotMain\\UpdateHandler.cs",
               "ToolTip": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\UpdateHandler.cs",
               "RelativeToolTip": "BotMain\\UpdateHandler.cs",
-              "ViewState": "AgIAAFwAAAAAAAAAAAAUwDsBAABTAAAAAAAAAA==",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAEwGkAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-13T13:41:12.296Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 1,
               "Title": "MyExceptions.cs",
               "DocumentMoniker": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Exceptions\\MyExceptions.cs",
               "RelativeDocumentMoniker": "BotMain\\Exceptions\\MyExceptions.cs",
               "ToolTip": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Exceptions\\MyExceptions.cs",
               "RelativeToolTip": "BotMain\\Exceptions\\MyExceptions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-12T09:17:40.897Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ToDoReportService.cs",
-              "DocumentMoniker": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Entities\\ToDoReportService.cs",
-              "RelativeDocumentMoniker": "BotMain\\Entities\\ToDoReportService.cs",
-              "ToolTip": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Entities\\ToDoReportService.cs",
-              "RelativeToolTip": "BotMain\\Entities\\ToDoReportService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "ConsoleBotClient.cs",
+              "DocumentMoniker": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\Otus.ToDoList.ConsoleBot\\ConsoleBotClient.cs",
+              "RelativeDocumentMoniker": "Otus.ToDoList.ConsoleBot\\ConsoleBotClient.cs",
+              "ToolTip": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\Otus.ToDoList.ConsoleBot\\ConsoleBotClient.cs",
+              "RelativeToolTip": "Otus.ToDoList.ConsoleBot\\ConsoleBotClient.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAEwEEAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T07:13:16.862Z",
+              "WhenOpened": "2025-05-12T15:02:33.6Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ITelegramBotClient.cs",
+              "DocumentMoniker": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\Otus.ToDoList.ConsoleBot\\ITelegramBotClient.cs",
+              "RelativeDocumentMoniker": "Otus.ToDoList.ConsoleBot\\ITelegramBotClient.cs",
+              "ToolTip": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\Otus.ToDoList.ConsoleBot\\ITelegramBotClient.cs",
+              "RelativeToolTip": "Otus.ToDoList.ConsoleBot\\ITelegramBotClient.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T13:02:18.588Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "README.md",
+              "DocumentMoniker": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\Otus.ToDoList.ConsoleBot\\README.md",
+              "RelativeDocumentMoniker": "Otus.ToDoList.ConsoleBot\\README.md",
+              "ToolTip": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\Otus.ToDoList.ConsoleBot\\README.md",
+              "RelativeToolTip": "Otus.ToDoList.ConsoleBot\\README.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-05-12T14:10:24.463Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "ToDoItem.cs",
-              "DocumentMoniker": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Entities\\ToDoItem.cs",
-              "RelativeDocumentMoniker": "BotMain\\Entities\\ToDoItem.cs",
-              "ToolTip": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Entities\\ToDoItem.cs",
-              "RelativeToolTip": "BotMain\\Entities\\ToDoItem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T09:25:32.398Z",
+              "Title": "BotMain.csproj",
+              "DocumentMoniker": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\BotMain.csproj",
+              "RelativeDocumentMoniker": "BotMain\\BotMain.csproj",
+              "ToolTip": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\BotMain.csproj",
+              "RelativeToolTip": "BotMain\\BotMain.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-12T09:23:24.915Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "IUserRepository.cs",
-              "DocumentMoniker": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Core\\DataAccess\\IUserRepository.cs",
-              "RelativeDocumentMoniker": "BotMain\\Core\\DataAccess\\IUserRepository.cs",
-              "ToolTip": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Core\\DataAccess\\IUserRepository.cs",
-              "RelativeToolTip": "BotMain\\Core\\DataAccess\\IUserRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T05:19:38.027Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "IToDoRepository.cs",
-              "DocumentMoniker": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Core\\DataAccess\\IToDoRepository.cs",
-              "RelativeDocumentMoniker": "BotMain\\Core\\DataAccess\\IToDoRepository.cs",
-              "ToolTip": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Core\\DataAccess\\IToDoRepository.cs",
-              "RelativeToolTip": "BotMain\\Core\\DataAccess\\IToDoRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAABSAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T05:20:03.747Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 8,
               "Title": "IToDoReportService.cs",
               "DocumentMoniker": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Core\\DataAccess\\IToDoReportService.cs",
               "RelativeDocumentMoniker": "BotMain\\Core\\DataAccess\\IToDoReportService.cs",
@@ -268,16 +252,76 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "BotMain",
-              "DocumentMoniker": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\BotMain.csproj",
-              "RelativeDocumentMoniker": "BotMain\\BotMain.csproj",
-              "ToolTip": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\BotMain.csproj",
-              "RelativeToolTip": "BotMain\\BotMain.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-05-12T09:23:24.915Z",
+              "DocumentIndex": 9,
+              "Title": "IToDoRepository.cs",
+              "DocumentMoniker": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Core\\DataAccess\\IToDoRepository.cs",
+              "RelativeDocumentMoniker": "BotMain\\Core\\DataAccess\\IToDoRepository.cs",
+              "ToolTip": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Core\\DataAccess\\IToDoRepository.cs",
+              "RelativeToolTip": "BotMain\\Core\\DataAccess\\IToDoRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T05:20:03.747Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "InMemoryUserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Infrastructure\\DataAccess\\InMemoryUserRepository.cs",
+              "RelativeDocumentMoniker": "BotMain\\Infrastructure\\DataAccess\\InMemoryUserRepository.cs",
+              "ToolTip": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Infrastructure\\DataAccess\\InMemoryUserRepository.cs",
+              "RelativeToolTip": "BotMain\\Infrastructure\\DataAccess\\InMemoryUserRepository.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAAABAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T05:21:05.336Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "InMemoryToDoRepository.cs",
+              "DocumentMoniker": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Infrastructure\\DataAccess\\InMemoryToDoRepository.cs",
+              "RelativeDocumentMoniker": "BotMain\\Infrastructure\\DataAccess\\InMemoryToDoRepository.cs",
+              "ToolTip": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Infrastructure\\DataAccess\\InMemoryToDoRepository.cs",
+              "RelativeToolTip": "BotMain\\Infrastructure\\DataAccess\\InMemoryToDoRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T05:45:39.063Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ToDoReportService.cs",
+              "DocumentMoniker": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Entities\\ToDoReportService.cs",
+              "RelativeDocumentMoniker": "BotMain\\Entities\\ToDoReportService.cs",
+              "ToolTip": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Entities\\ToDoReportService.cs",
+              "RelativeToolTip": "BotMain\\Entities\\ToDoReportService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T07:13:16.862Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ToDoItem.cs",
+              "DocumentMoniker": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Entities\\ToDoItem.cs",
+              "RelativeDocumentMoniker": "BotMain\\Entities\\ToDoItem.cs",
+              "ToolTip": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Entities\\ToDoItem.cs",
+              "RelativeToolTip": "BotMain\\Entities\\ToDoItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T09:25:32.398Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "IUserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Core\\DataAccess\\IUserRepository.cs",
+              "RelativeDocumentMoniker": "BotMain\\Core\\DataAccess\\IUserRepository.cs",
+              "ToolTip": "C:\\Users\\weare\\source\\repos\\Niennel\\Telegram_bot\\BotMain\\Core\\DataAccess\\IUserRepository.cs",
+              "RelativeToolTip": "BotMain\\Core\\DataAccess\\IUserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T05:19:38.027Z"
             }
           ]
         }
