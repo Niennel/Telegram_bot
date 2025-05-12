@@ -1,12 +1,13 @@
-﻿using System;
+﻿using BotMain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 //using static BotMain.UpdateHandler;
-using static BotMain.ToDoUser;
+using static BotMain.Entities.ToDoUser;
 
-namespace BotMain
+namespace BotMain.Services
 {
     public interface IUserService
     {
