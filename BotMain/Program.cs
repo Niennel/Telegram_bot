@@ -2,10 +2,14 @@
 using System.Text;
 using System.Text.Unicode;
 using static BotMain.UpdateHandler;
-using static BotMain.TaskCountLimitException;
+using static BotMain.Exceptions.TaskCountLimitException;
 
- using Otus.ToDoList.ConsoleBot;
- using Otus.ToDoList.ConsoleBot.Types;
+using Otus.ToDoList.ConsoleBot;
+using Otus.ToDoList.ConsoleBot.Types;
+using BotMain.Core.DataAccess;
+using BotMain.Entities;
+using BotMain.Infrastructure.DataAccess;
+using BotMain.Services;
 
 namespace BotMain
 {
@@ -18,11 +22,15 @@ namespace BotMain
         {
             Console.InputEncoding = Encoding.Unicode;
             Console.OutputEncoding = Encoding.Unicode;
-      
+
             var botClient = new ConsoleBotClient();
-            var userService = new UserService();
-            var toDoService = new ToDoService();
-            var handler = new UpdateHandler(userService, toDoService);
+
+            IUserRepository userRepository = new InMemoryUserRepository();
+            IToDoRepository toDoRepository = new InMemoryToDoRepository();
+            IToDoReportService toDoReportService = new ToDoReportService(toDoRepository);
+            var userService = new UserService(userRepository);
+            var toDoService = new ToDoService(toDoRepository);
+            var handler = new UpdateHandler(userService, toDoService,toDoReportService);
 
             try
             {

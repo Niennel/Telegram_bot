@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BotMain
+namespace BotMain.Exceptions
 {
    public class TaskCountLimitException (int taskCountLimit): Exception ($"Превышено максимальное количество задач равное {taskCountLimit}");
     public class TaskLengthLimitException(int taskLength, int taskLengthLimit) : Exception($"Длина задачи '{taskLength}' превышает максимально допустимое значение { taskLengthLimit }");

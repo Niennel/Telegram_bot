@@ -5,28 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static BotMain.UpdateHandler;
-using static BotMain.ToDoUser;
+using static BotMain.Entities.ToDoUser;
+using BotMain.Entities;
 
 
-namespace BotMain
+namespace BotMain.Services
 {
-    class UserService : IUserService
+    class UserService (Core.DataAccess.IUserRepository userRepository) : IUserService
     {
-        private readonly List<ToDoUser> _users = new();
-     
+    
         ToDoUser? IUserService.GetUser(long telegramUserId)
         {
-            return _users.FirstOrDefault(u => u.TelegramUserId == telegramUserId);
+            return userRepository.GetUserByTelegramUserId(telegramUserId);
         }
 
         public ToDoUser RegisterUser(long telegramUserId, string telegramUserName)
         {
-            foreach (var user in _users.Where(user => user.TelegramUserId == telegramUserId))
-            {
-                //пользователь уже зарегистрирован
-                return user;
-            }
-
             var newUser = new ToDoUser()
             {
                 RegisteredAt = DateTime.Now,
@@ -34,8 +28,8 @@ namespace BotMain
                 TelegramUserName = telegramUserName,
                 UserId = Guid.NewGuid()
             };
-            
-            _users.Add(newUser);
+
+            userRepository.Add(newUser);
             return newUser;
         }
     }

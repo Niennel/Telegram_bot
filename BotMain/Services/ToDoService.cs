@@ -6,17 +6,28 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static BotMain.ToDoItem;
+using System.Xml.Linq;
+using static BotMain.Entities.ToDoItem;
+using BotMain.Exceptions;
+using BotMain.Entities;
 
-namespace BotMain
+namespace BotMain.Services
 {
-    class ToDoService : IToDoService
+    class ToDoService(Core.DataAccess.IToDoRepository tasks) : IToDoService
     {
-        private readonly List<ToDoItem> tasks = new();
+        public IReadOnlyList<ToDoItem> Find(ToDoUser user, string namePrefix)
+        {
+            string _Prefix;
+            _Prefix = Program.ValidateString(namePrefix);
+
+            return tasks.Find(user.UserId, item => item.Name.StartsWith(namePrefix));
+        }
+
+        //private readonly List<ToDoItem> tasks = new();
         ToDoItem IToDoService.Add(ToDoUser user, string name)
         {
             //проверка на количество
-            if (tasks.Count>=Program.maxTasks)
+            if (tasks.CountActive(user.UserId)>=Program.maxTasks)
                 throw new TaskCountLimitException(Program.maxTasks);
             
             string task_in;
@@ -29,45 +40,37 @@ namespace BotMain
             var newTask = new ToDoItem(task_in,user);
 
             //проверка на наличие
-            var activeTasks = tasks
-              .Where(task => task.Name == task_in)         // задачи этого пользователя
-              .ToList();
-            if (activeTasks.Count>0)
+            if (tasks.ExistsByName(user.UserId,name))
                 throw new DuplicateTaskException(task_in);
             
             tasks.Add(newTask);
 
-            return (newTask);
+            return newTask;
         }
 
         void IToDoService.Delete(Guid id)
         {
-            tasks.RemoveAll(task => task.Id == id);
+            tasks.Delete(id);
         }
 
         IReadOnlyList<ToDoItem> IToDoService.GetActiveByUserId(Guid userId)
         {
-            var activeTasks = tasks
-              .Where(task => task.User.UserId == userId)         // задачи этого пользователя
-              .Where(task => task.State == ToDoItemState.Active) // только активные задачи
-              .ToList();                                        // в виде списка
-            
-            return activeTasks;
+            return tasks.GetActiveByUserId(userId);
         }
 
         IReadOnlyList<ToDoItem> IToDoService.GetAllByUserId(Guid userId)
         {
-            var allTasks = tasks
-            .Where(task => task.User.UserId == userId)         // задачи этого пользователя
-            .ToList();                                        // в виде списка
-
-            return allTasks;
+            return tasks.GetAllByUserId(userId);
         }
 
         void IToDoService.MarkCompleted(Guid id)
         {
-            foreach (var task in tasks.Where(task => task.Id == id))
+            var task = tasks.Get(id);
+            if (task == null) return;
                 task.State = ToDoItemState.Completed;
+                task.StateChangedAt = DateTime.Now;
+
+            tasks.Update(task);
         }
     }
 }
