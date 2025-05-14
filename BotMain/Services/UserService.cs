@@ -14,12 +14,12 @@ namespace BotMain.Services
     class UserService (Core.DataAccess.IUserRepository userRepository) : IUserService
     {
     
-        ToDoUser? IUserService.GetUser(long telegramUserId)
+        async Task <ToDoUser?> IUserService.GetUser(long telegramUserId, CancellationToken ct)
         {
-            return userRepository.GetUserByTelegramUserId(telegramUserId);
+            return await userRepository.GetUserByTelegramUserId(telegramUserId,ct);
         }
 
-        public ToDoUser RegisterUser(long telegramUserId, string telegramUserName)
+        public async Task <ToDoUser> RegisterUser(long telegramUserId, string telegramUserName, CancellationToken ct)
         {
             var newUser = new ToDoUser()
             {
@@ -29,7 +29,7 @@ namespace BotMain.Services
                 UserId = Guid.NewGuid()
             };
 
-            userRepository.Add(newUser);
+            await userRepository.Add(newUser, ct);
             return newUser;
         }
     }

@@ -13,22 +13,21 @@ namespace BotMain.Infrastructure.DataAccess
     {
         private readonly List<ToDoUser> _users = [];
 
-        ToDoUser? IUserRepository.GetUser(Guid userId)
+        async Task<ToDoUser?> IUserRepository.GetUser(Guid userId, CancellationToken ct)
         {
             return _users.FirstOrDefault(u => u.UserId == userId);
         }
-        ToDoUser? IUserRepository.GetUserByTelegramUserId(long telegramUserId)
+        async Task<ToDoUser?> IUserRepository.GetUserByTelegramUserId(long telegramUserId, CancellationToken ct)
         {
             return _users.FirstOrDefault(u => u.TelegramUserId == telegramUserId);
         }
-        void IUserRepository.Add(ToDoUser user)
+        async Task IUserRepository.Add(ToDoUser user, CancellationToken ct)
         {
             if(!_users.Contains(user))
             {
                 _users.Add(user);
             }
         }
-
       
     
     }

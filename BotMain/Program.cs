@@ -17,6 +17,16 @@ namespace BotMain
     {
         public static int maxTasks;
         public static int maxTaskLength;
+        private static void DisplayMessageStart(string message)
+        {
+            Console.WriteLine($"Началась обработка сообщения '{message}' в {DateTime.Now}");
+        }
+
+        private static void DisplayMessageStop(string message)
+        {
+            Console.WriteLine($"Закончилась обработка сообщения '{message}' в {DateTime.Now}");
+        }
+
 
         static void Main(string[] args)
         {
@@ -33,6 +43,8 @@ namespace BotMain
             using var cts = new CancellationTokenSource();
             var handler = new UpdateHandler(userService, toDoService,toDoReportService, cts);
 
+            handler.OnHandleUpdateStarted += DisplayMessageStart;//подписываемся
+            handler.OnHandleUpdateCompleted += DisplayMessageStop;//подписываемся
             try
             {
                 Console.Write("Введите максимально допустимое количество задач: ");
@@ -49,7 +61,11 @@ namespace BotMain
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
             }
-            
+            finally
+            {
+                handler.OnHandleUpdateStarted -= DisplayMessageStart; //отписываемся
+                handler.OnHandleUpdateCompleted -= DisplayMessageStop;//отписываемся
+            }
         }
        
         private static int ParseAndValidateInt(string? str, int min, int max)

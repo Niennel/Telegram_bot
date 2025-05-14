@@ -4,6 +4,7 @@ using BotMain.Services;
 using Otus.ToDoList.ConsoleBot;
 using Otus.ToDoList.ConsoleBot.Types;
 using System;
+using System.Data;
 using System.Threading.Tasks;
 using static BotMain.Entities.ToDoItem;
 
@@ -18,92 +19,89 @@ namespace BotMain
         //private readonly IUserService _userService;
         //private readonly IToDoService _toDoService;
         //private readonly IToDoReportService _toDoReportService;
+        public delegate void MessageEventHandler(string message);
+
+        public event MessageEventHandler? OnHandleUpdateStarted;
+        public event MessageEventHandler? OnHandleUpdateCompleted;
         public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken ct)
         {
             try
-                {
-                   var comand = update.Message.Text.Split(" ")[0]; 
-                   var textToDo = string.Join(" ", update.Message.Text.Split(" ")[1..]); 
+            {
+                OnHandleUpdateStarted?.Invoke(update.Message.Text);
+                var comand = update.Message.Text.Split(" ")[0];
+                var textToDo = string.Join(" ", update.Message.Text.Split(" ")[1..]);
 
-                    if (comand == "/start")
-                    {
-                        Start(botClient, update, ct);
-                    }
-                    if (comand == "/help")
-                    {
-                        Help(botClient, update, ct);
-                    }
-                    if (comand == "/info")
-                    {
-                        Info(botClient, update,  ver, date,ct);
-                    }
-            
-                    if (comand == "/addtask")
-                    {
-                        Addtask(botClient, update, textToDo, ct);
-                    }
-                    if (comand == "/showtasks")
-                    {
-                        Showtasks(botClient, update, ct);
-                    }
-                    if (comand == "/removetask")
-                    {
-                        Removetask(botClient, update, textToDo, ct);
-                    }
-                    if (comand == "/completetask")
-                    {
-                       CompleteTask(botClient, update, textToDo, ct);
-                    }
-                    if (comand == "/showalltasks")
-                    {
-                        ShowAlltasks(botClient, update, ct);
-                    }
-                    if (comand == "/report")
-                    {
-                         Report(botClient, update, _toDoReportService, ct);
-                    }
-                    if (comand == "/find")
-                    {
-                        Find(botClient, update, textToDo, ct);
-                    }
-                   
-                  await botClient.SendMessage(update.Message.Chat, "Введите команду", ct);
-                }
-                catch (ArgumentException e)
+                if (comand == "/start")
                 {
-                    Console.WriteLine(e.Message);
-                    Console.WriteLine("Press any key to continue...");
-                    Console.ReadKey();
+                    await Start(botClient, update, ct);
                 }
-                catch (TaskCountLimitException e)
+                if (comand == "/help")
                 {
-                    Console.WriteLine(e.Message);
-                    Console.WriteLine("Press any key to continue...");
-                    Console.ReadKey();
+                    await Help(botClient, update, ct);
                 }
-                catch (TaskLengthLimitException e)
+                if (comand == "/info")
                 {
-                    Console.WriteLine(e.Message);
-                    Console.WriteLine("Press any key to continue...");
-                    Console.ReadKey();
+                    await Info(botClient, update, ver, date, ct);
                 }
-                catch (DuplicateTaskException e)
-                {
-                    Console.WriteLine(e.Message);
-                    Console.WriteLine("Press any key to continue...");
-                    Console.ReadKey();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Произошла непредвиденная ошибка: ");
-                    Console.WriteLine(
-                        $"e.GetType = {e.GetType()}\ne.Message = {e.Message}\ne.StackTrace = {e.StackTrace}\ne.InnerException = {e.InnerException}");
-                    Console.WriteLine("Press any key to continue...");
-                    Console.ReadKey();
-                }
-               
 
-        }
+                if (comand == "/addtask")
+                {
+                    await Addtask(botClient, update, textToDo, ct);
+                }
+                if (comand == "/showtasks")
+                {
+                    await Showtasks(botClient, update, ct);
+                }
+                if (comand == "/removetask")
+                {
+                    await Removetask(botClient, update, textToDo, ct);
+                }
+                if (comand == "/completetask")
+                {
+                    await CompleteTask(botClient, update, textToDo, ct);
+                }
+                if (comand == "/showalltasks")
+                {
+                    await ShowAlltasks(botClient, update, ct);
+                }
+                if (comand == "/report")
+                {
+                    await Report(botClient, update, _toDoReportService, ct);
+                }
+                if (comand == "/find")
+                {
+                    await Find(botClient, update, textToDo, ct);
+                }
+                OnHandleUpdateCompleted?.Invoke(update.Message.Text);
+                //await botClient.SendMessage(update.Message.Chat, "Введите команду", ct);
+            }
+            catch (ArgumentException e)
+            {
+                await HandleErrorAsync(botClient, e, ct);
+                //throw; 
+            }
+            catch (TaskCountLimitException e)
+            {
+                await HandleErrorAsync(botClient, e, ct);
+                //throw;
+            }
+            catch (TaskLengthLimitException e)
+            {
+                await HandleErrorAsync(botClient, e, ct);
+                //throw;
+            }
+            catch (DuplicateTaskException e)
+            {
+                await HandleErrorAsync(botClient, e, ct);
+                //throw;
+            }
+            catch (Exception e)
+            {
+                await HandleErrorAsync(botClient, e, ct);
+                //throw;
+            }
+            finally { await botClient.SendMessage(update.Message.Chat, "Введите команду", ct); }
+            }
         //static void Info(int x, DateOnly d)
         //{
         //    Console.WriteLine($"Привет, меня зовут ZiLong!");
@@ -126,8 +124,9 @@ namespace BotMain
         //Регистрация пользователя
         private async Task Start(ITelegramBotClient botClient, Update update, CancellationToken cts)
         {
-            _userService.RegisterUser(update.Message.From.Id, update.Message.From.Username!);
-            var userNm = _userService.GetUser(update.Message.From.Id);
+            await _userService.RegisterUser(update.Message.From.Id, update.Message.From.Username!,cts);
+            var userNm = await _userService.GetUser(update.Message.From.Id,cts);
+           // var uName = userNm.TelegramUserName;
             await botClient.SendMessage(update.Message.Chat,
                 $"Добро пожаловать, {userNm.TelegramUserName}!\n" +
                 "Введите /help для списка команд",cts);
@@ -158,7 +157,8 @@ namespace BotMain
                                 + "/info - команда для предоставления информации о версии\n"
                                 + "/help - команда вывода справки\n";
 
-            if (_userService.GetUser(update.Message.From.Id) != null)
+            var user = await _userService.GetUser(update.Message.From.Id, cts);
+            if (user != null)
             {
                 Help_text = Help_text + new_addtask ;
             }
@@ -168,14 +168,14 @@ namespace BotMain
         //Добавление задачи
         private async Task Addtask(ITelegramBotClient botClient, Update update, string name, CancellationToken cts)
         {
-            var user = _userService.GetUser(update.Message.From.Id);
+            var user = await _userService.GetUser(update.Message.From.Id, cts);
             if (user == null)
             {
                 await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", cts);
                 return;
             }
 
-            var task_in = _toDoService.Add(user, name);
+            var task_in = await _toDoService.Add(user, name,cts);
 
             await botClient.SendMessage(update.Message.Chat, $"Задача  {task_in.Name} добавлена в список\n" +
                                                       $"Id={task_in.Id}", cts);
@@ -183,13 +183,13 @@ namespace BotMain
         //Просмотр активных задач
         private async Task Showtasks(ITelegramBotClient botClient, Update update, CancellationToken cts)
         {
-            if (_userService.GetUser(update.Message.From.Id) == null)
+            if (await _userService.GetUser(update.Message.From.Id, cts) == null)
             {
                 await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", cts);
                 return;
             }
-            var user = _userService.GetUser(update.Message.From.Id);
-            var _tasks = _toDoService.GetActiveByUserId(user.UserId);
+            var user = await _userService.GetUser(update.Message.From.Id,cts);
+            var _tasks = await _toDoService.GetActiveByUserId(user.UserId,cts);
             string state = ":";
             if (_tasks.Count == 0)
                 state = " пуст";
@@ -197,7 +197,6 @@ namespace BotMain
 
             await botClient.SendMessage(update.Message.Chat, $"{text}{state}", cts);
 
-            Console.WriteLine($"Привет, меня зовут ZiLong!");
             foreach (var task in _tasks)
             {
                 await botClient.SendMessage(update.Message.Chat, $"{task.Name}- {task.CreatedAt}- {task.Id}", cts);
@@ -206,13 +205,13 @@ namespace BotMain
         //Просмотр всех задач
         private async Task ShowAlltasks(ITelegramBotClient botClient, Update update, CancellationToken cts)
         {
-            if (_userService.GetUser(update.Message.From.Id) == null)
+            if (await _userService.GetUser(update.Message.From.Id, cts) == null)
             {
                 await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", cts);
                 return;
             }
-            var user = _userService.GetUser(update.Message.From.Id);
-            var _tasks = _toDoService.GetAllByUserId(user.UserId);
+            var user = await _userService.GetUser(update.Message.From.Id, cts);
+            var _tasks = await _toDoService.GetAllByUserId(user.UserId, cts);
             string state = ":";
             if (_tasks.Count == 0)
                 state = " пуст";
@@ -229,13 +228,14 @@ namespace BotMain
         //Удаление задач
         private async Task Removetask(ITelegramBotClient botClient, Update update, string id, CancellationToken cts)
         {
-            if (_userService.GetUser(update.Message.From.Id) == null)
+            var user = await _userService.GetUser(update.Message.From.Id, cts);
+            if (user == null)
             {
                 await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", cts);
                 return;
             }
-            var user = _userService.GetUser(update.Message.From.Id);
-            var _tasks = _toDoService.GetAllByUserId(user.UserId);
+            
+            var _tasks = await _toDoService.GetAllByUserId(user.UserId, cts);
             if (_tasks.Count == 0)
             {
                 await botClient.SendMessage(update.Message.Chat, $"Ваш список задач пуст", cts);
@@ -254,7 +254,7 @@ namespace BotMain
                 await botClient.SendMessage(update.Message.Chat, $"Такой задачи нет", cts);
                 return;
             }
-            _toDoService.Delete(numberToRemove);
+            await _toDoService.Delete(numberToRemove, cts);
 
             foreach (var task in _tasks.Where(task => task.Id == numberToRemove))
             {
@@ -266,13 +266,13 @@ namespace BotMain
         //Завершение задач
         private async Task CompleteTask(ITelegramBotClient botClient, Update update, string id, CancellationToken cts)
         {
-            if (_userService.GetUser(update.Message.From.Id) == null)
+            if (await _userService.GetUser(update.Message.From.Id, cts) == null)
             {
                 await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", cts);
                 return;
             }
-            var user = _userService.GetUser(update.Message.From.Id);
-            var _tasks = _toDoService.GetActiveByUserId(user.UserId);
+            var user = await _userService.GetUser(update.Message.From.Id, cts);
+            var _tasks = await _toDoService.GetActiveByUserId(user.UserId, cts);
             if (_tasks.Count == 0)
             {
                 await botClient.SendMessage(update.Message.Chat, $"Ваш список задач пуст", cts);
@@ -291,7 +291,7 @@ namespace BotMain
                 await botClient.SendMessage(update.Message.Chat, $"Такой задачи нет", cts);
                 return;
             }
-            _toDoService.MarkCompleted(numberToRemove);
+            await _toDoService.MarkCompleted(numberToRemove, cts);
 
             foreach (var task in _tasks.Where(task => task.Id == numberToRemove))
             {
@@ -302,32 +302,33 @@ namespace BotMain
         private async Task Report(ITelegramBotClient botClient, Update update, IToDoReportService toDoReport, CancellationToken cts)
         {
             //если пользователь не зарегистрирован, то ничего не происходит при вызове
-            if (_userService.GetUser(update.Message.From.Id) == null)
+            if (await _userService.GetUser(update.Message.From.Id, cts) == null)
             {
                 await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", cts);
                 return;
             }
-
-            var tuple = toDoReport.GetUserStats(_userService.GetUser(update.Message.From.Id)!.UserId);
+            var user = await _userService.GetUser(update.Message.From.Id, cts);
+            var tuple = await toDoReport.GetUserStats(user!.UserId, cts);
             await botClient.SendMessage(update.Message.Chat,
             $"Статистика по задачам на {tuple.generatedAt}. Всего: {tuple.total}; Завершенных: {tuple.completed}; Активных: {tuple.active};", cts);
         }
         private async Task Find(ITelegramBotClient botClient, Update update, string pref, CancellationToken cts)
         {
-            if (_userService.GetUser(update.Message.From.Id) == null)
+            var user = await _userService.GetUser(update.Message.From.Id, cts);
+
+            if (user == null)
             {
                 await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", cts);
                 return;
             }
-            var user = _userService.GetUser(update.Message.From.Id);
-            var _tasks = _toDoService.GetAllByUserId(user.UserId);
+            var _tasks = await _toDoService.GetAllByUserId(user.UserId, cts);
             if (_tasks.Count == 0)
             {
                 await botClient.SendMessage(update.Message.Chat, $"Ваш список задач пуст", cts);
                 return;
             }
 
-            var _findtasks = _toDoService.Find(user,pref);
+            var _findtasks = await _toDoService.Find(user, pref, cts);
 
             if (_findtasks.Count == 0)
             {
@@ -343,10 +344,10 @@ namespace BotMain
 
         }
 
-        public Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken ct)
+        public async Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken ct)
         {
             Console.WriteLine($"HandleError: {exception})");
-            return Task.CompletedTask;
+            await Task.CompletedTask;
         }
     }
 }
