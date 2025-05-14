@@ -15,19 +15,20 @@ namespace BotMain.Services
 {
     class ToDoService(Core.DataAccess.IToDoRepository tasks) : IToDoService
     {
-        public IReadOnlyList<ToDoItem> Find(ToDoUser user, string namePrefix)
+        public async Task<IReadOnlyList<ToDoItem>> Find(ToDoUser user, string namePrefix, CancellationToken ct)
         {
             string _Prefix;
             _Prefix = Program.ValidateString(namePrefix);
 
-            return tasks.Find(user.UserId, item => item.Name.StartsWith(namePrefix));
+            return await tasks.Find(user.UserId, item => item.Name.StartsWith(namePrefix), ct);
         }
 
         //private readonly List<ToDoItem> tasks = new();
-        ToDoItem IToDoService.Add(ToDoUser user, string name)
+        public async Task<ToDoItem > Add(ToDoUser user, string name, CancellationToken ct)
         {
             //проверка на количество
-            if (tasks.CountActive(user.UserId)>=Program.maxTasks)
+            var count = await tasks.CountActive(user.UserId, ct);
+            if (count >= Program.maxTasks)
                 throw new TaskCountLimitException(Program.maxTasks);
             
             string task_in;
@@ -40,37 +41,37 @@ namespace BotMain.Services
             var newTask = new ToDoItem(task_in,user);
 
             //проверка на наличие
-            if (tasks.ExistsByName(user.UserId,name))
+            if (await  tasks.ExistsByName(user.UserId, name, ct))
                 throw new DuplicateTaskException(task_in);
             
-            tasks.Add(newTask);
+            await tasks.Add(newTask,ct);
 
             return newTask;
         }
 
-        void IToDoService.Delete(Guid id)
+        async Task IToDoService.Delete(Guid id, CancellationToken ct)
         {
-            tasks.Delete(id);
+            await tasks.Delete(id, ct);
         }
 
-        IReadOnlyList<ToDoItem> IToDoService.GetActiveByUserId(Guid userId)
+         async Task <IReadOnlyList<ToDoItem>> IToDoService.GetActiveByUserId(Guid userId, CancellationToken ct)
         {
-            return tasks.GetActiveByUserId(userId);
+            return await tasks.GetActiveByUserId(userId, ct);
         }
 
-        IReadOnlyList<ToDoItem> IToDoService.GetAllByUserId(Guid userId)
+        async Task<IReadOnlyList<ToDoItem>> IToDoService.GetAllByUserId(Guid userId, CancellationToken ct)
         {
-            return tasks.GetAllByUserId(userId);
+            return await tasks.GetAllByUserId(userId, ct);
         }
 
-        void IToDoService.MarkCompleted(Guid id)
+        async Task IToDoService.MarkCompleted(Guid id, CancellationToken ct)
         {
-            var task = tasks.Get(id);
+            var task = await tasks.Get(id, ct);
             if (task == null) return;
                 task.State = ToDoItemState.Completed;
                 task.StateChangedAt = DateTime.Now;
 
-            tasks.Update(task);
+            await tasks.Update(task, ct);
         }
     }
 }
