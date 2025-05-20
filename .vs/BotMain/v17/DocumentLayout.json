@@ -90,8 +90,7 @@
               "RelativeToolTip": "BotMain\\Core\\DataAccess\\IUserRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T05:19:38.027Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T05:19:38.027Z"
             },
             {
               "$type": "Document",
@@ -103,8 +102,7 @@
               "RelativeToolTip": "BotMain\\Infrastructure\\DataAccess\\InMemoryUserRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T05:21:05.336Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T05:21:05.336Z"
             },
             {
               "$type": "Document",
@@ -116,8 +114,7 @@
               "RelativeToolTip": "BotMain\\Services\\IToDoService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T09:20:43.865Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T09:20:43.865Z"
             },
             {
               "$type": "Document",
@@ -129,8 +126,7 @@
               "RelativeToolTip": "BotMain\\Services\\IUserService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T09:21:08.429Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T09:21:08.429Z"
             },
             {
               "$type": "Document",
@@ -142,8 +138,7 @@
               "RelativeToolTip": "BotMain\\Services\\ToDoService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-28T15:42:12.932Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-28T15:42:12.932Z"
             },
             {
               "$type": "Document",
@@ -155,8 +150,7 @@
               "RelativeToolTip": "BotMain\\Program.cs",
               "ViewState": "AgIAAD4AAAAAAAAAAADwv0sAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T07:52:54.414Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T07:52:54.414Z"
             },
             {
               "$type": "Document",
@@ -168,8 +162,7 @@
               "RelativeToolTip": "BotMain\\Services\\UserService.cs",
               "ViewState": "AgIAABEAAAAAAAAAAAAQwAwAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T05:48:37.011Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T05:48:37.011Z"
             },
             {
               "$type": "Document",
@@ -194,8 +187,7 @@
               "RelativeToolTip": "BotMain\\Entities\\ToDoItem.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T09:25:32.398Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T09:25:32.398Z"
             },
             {
               "$type": "Document",
@@ -207,8 +199,7 @@
               "RelativeToolTip": "BotMain\\Infrastructure\\DataAccess\\InMemoryToDoRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T05:45:39.063Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T05:45:39.063Z"
             },
             {
               "$type": "Document",
@@ -220,8 +211,7 @@
               "RelativeToolTip": "BotMain\\Core\\DataAccess\\IToDoRepository.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABMAAABRAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T05:20:03.747Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T05:20:03.747Z"
             },
             {
               "$type": "Document",
@@ -233,8 +223,7 @@
               "RelativeToolTip": "BotMain\\Core\\DataAccess\\IToDoReportService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T06:58:14.571Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T06:58:14.571Z"
             },
             {
               "$type": "Document",
@@ -246,8 +235,7 @@
               "RelativeToolTip": "BotMain\\Entities\\ToDoReportService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T07:13:16.862Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T07:13:16.862Z"
             },
             {
               "$type": "Document",
