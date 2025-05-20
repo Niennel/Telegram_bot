@@ -1,6 +1,6 @@
 ﻿using BotMain.Core.DataAccess;
 using BotMain.Entities;
-using Otus.ToDoList.ConsoleBot.Types;
+//using Otus.ToDoList.ConsoleBot.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,20 +13,22 @@ namespace BotMain.Infrastructure.DataAccess
     {
         private readonly List<ToDoUser> _users = [];
 
-        async Task<ToDoUser?> IUserRepository.GetUser(Guid userId, CancellationToken ct)
+        Task<ToDoUser?> IUserRepository.GetUser(Guid userId, CancellationToken ct)
         {
-            return _users.FirstOrDefault(u => u.UserId == userId);
+            return Task.FromResult(_users.FirstOrDefault(u => u.UserId == userId));
         }
-        async Task<ToDoUser?> IUserRepository.GetUserByTelegramUserId(long telegramUserId, CancellationToken ct)
+        Task<ToDoUser?> IUserRepository.GetUserByTelegramUserId(long telegramUserId, CancellationToken ct)
         {
-            return _users.FirstOrDefault(u => u.TelegramUserId == telegramUserId);
+            return Task.FromResult(_users.FirstOrDefault(u => u.TelegramUserId == telegramUserId));
         }
-        async Task IUserRepository.Add(ToDoUser user, CancellationToken ct)
+        Task IUserRepository.Add(ToDoUser user, CancellationToken ct)
         {
-            if(!_users.Contains(user))
+            if (!_users.Contains(user))
             {
                 _users.Add(user);
             }
+
+            return Task.CompletedTask;
         }
       
     

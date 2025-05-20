@@ -1,4 +1,4 @@
-﻿using Otus.ToDoList.ConsoleBot.Types;
+﻿//using Otus.ToDoList.ConsoleBot.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 using static BotMain.UpdateHandler;
 using static BotMain.Entities.ToDoUser;
 using BotMain.Entities;
-
+using Telegram.Bot;
+using Telegram.Bot.Polling;
+using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace BotMain.Services
 {

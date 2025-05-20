@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Otus.ToDoList.ConsoleBot")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a328fe900d6a67b00126b59072dd60d31b9f35ef")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c99542e363e6c76b0d1c901620f3e9bd22a32e66")]
 [assembly: System.Reflection.AssemblyProductAttribute("Otus.ToDoList.ConsoleBot")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Otus.ToDoList.ConsoleBot")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

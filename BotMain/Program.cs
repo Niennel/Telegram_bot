@@ -4,12 +4,16 @@ using System.Text.Unicode;
 using static BotMain.UpdateHandler;
 using static BotMain.Exceptions.TaskCountLimitException;
 
-using Otus.ToDoList.ConsoleBot;
-using Otus.ToDoList.ConsoleBot.Types;
+//using Otus.ToDoList.ConsoleBot;
+//using Otus.ToDoList.ConsoleBot.Types;
 using BotMain.Core.DataAccess;
 using BotMain.Entities;
 using BotMain.Infrastructure.DataAccess;
 using BotMain.Services;
+using Telegram.Bot;
+using Telegram.Bot.Polling;
+using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace BotMain
 {
@@ -28,32 +32,64 @@ namespace BotMain
         }
 
 
-        static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             Console.InputEncoding = Encoding.Unicode;
             Console.OutputEncoding = Encoding.Unicode;
-
-            var botClient = new ConsoleBotClient();
 
             IUserRepository userRepository = new InMemoryUserRepository();
             IToDoRepository toDoRepository = new InMemoryToDoRepository();
             IToDoReportService toDoReportService = new ToDoReportService(toDoRepository);
             var userService = new UserService(userRepository);
             var toDoService = new ToDoService(toDoRepository);
-            using var cts = new CancellationTokenSource();
-            var handler = new UpdateHandler(userService, toDoService,toDoReportService, cts);
+            var handler = new UpdateHandler(userService, toDoService, toDoReportService);
 
-            handler.OnHandleUpdateStarted += DisplayMessageStart;//подписываемся
-            handler.OnHandleUpdateCompleted += DisplayMessageStop;//подписываемся
+            
             try
             {
+                string token = Environment.GetEnvironmentVariable("TELEGRAM_BOT_TOKEN_EX1", EnvironmentVariableTarget.User);
+                if (string.IsNullOrEmpty(token))
+                {
+                    Console.WriteLine("Bot token not found. Please set the TELEGRAM_BOT_TOKEN_EX1 environment variable.");
+                    return;
+                }
+
+                var botClient = new TelegramBotClient(token!);
+                using var cts = new CancellationTokenSource();
+
+                var receiverOptions = new ReceiverOptions
+                {
+                    AllowedUpdates = [UpdateType.Message],
+                    DropPendingUpdates = true
+                };
+
+                handler.OnHandleUpdateStarted += DisplayMessageStart;//подписываемся
+                handler.OnHandleUpdateCompleted += DisplayMessageStop;//подписываемся
+
                 Console.Write("Введите максимально допустимое количество задач: ");
                 maxTasks = ParseAndValidateInt(Console.ReadLine(), 1, 100);
 
                 Console.Write("Введите максимально допустимую длину задачи: ");
                 maxTaskLength = ParseAndValidateInt(Console.ReadLine(), 1, 100);
 
-                botClient.StartReceiving(handler, cts.Token);
+                botClient.StartReceiving(handler, receiverOptions, cancellationToken: cts.Token);
+                var me = await botClient.GetMe();
+                Console.WriteLine($"{me.FirstName} запущен!");
+                //await Task.Delay(-1); // Устанавливаем бесконечную задержку
+
+                Console.WriteLine("Нажмите клавишу A для выхода");
+                while (true)
+                {
+                    var symbol = Console.ReadKey();
+                    if (symbol.Key == ConsoleKey.A)
+                    {
+                        await cts.CancelAsync();
+                        Console.WriteLine("\nBot stopped");
+                        break;
+                    }
+
+                    Console.WriteLine($"\n{me.Id} - {me.FirstName} - {me.LastName} - {me.Username}");
+                }
             }
             catch (ArgumentException e)
             {
@@ -82,5 +118,6 @@ namespace BotMain
                 return str;
             throw new ArgumentException();
         }
+
     }
 }
