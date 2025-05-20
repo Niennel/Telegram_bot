@@ -13,70 +13,73 @@ namespace BotMain.Infrastructure.DataAccess
     class InMemoryToDoRepository : IToDoRepository
     {
         private readonly List<ToDoItem> tasks = new();
-        public void Add(ToDoItem item)
+        public Task Add(ToDoItem item, CancellationToken ct)
         {
             tasks.Add(item);
+            return Task.CompletedTask;
         }
 
-        public int CountActive(Guid userId)
+        public async Task<int> CountActive(Guid userId, CancellationToken ct)
         {
-            var CA = GetActiveByUserId(userId);
+            var CA = await GetActiveByUserId(userId,  ct);
             return CA.Count;
         }
 
-        public void Delete(Guid id)
+        public Task Delete(Guid id, CancellationToken ct)
         {
             tasks.RemoveAll(task => task.Id == id);
+            return Task.CompletedTask;
         }
 
-        public bool ExistsByName(Guid userId, string name)
+        public Task <bool> ExistsByName(Guid userId, string name, CancellationToken ct)
         {
             var eTask = tasks
               .Where(task => task.User.UserId == userId)         // задачи этого пользователя
               .Where(task => task.Name == name) // только активные задачи
               .ToList();                                        // в виде списка
 
-            return eTask.Count!=0;
+            return Task.FromResult(eTask.Count!=0);
         }
 
-        public ToDoItem? Get(Guid id)
+        public Task<ToDoItem?> Get(Guid id, CancellationToken ct)
         {
-            return tasks.FirstOrDefault(x=>x.Id==id);
+            return Task.FromResult(tasks.FirstOrDefault(x=>x.Id==id));
         }
 
-        public IReadOnlyList<ToDoItem> GetActiveByUserId(Guid userId)
+        public Task<IReadOnlyList<ToDoItem>> GetActiveByUserId(Guid userId, CancellationToken ct)
         {
             var activeTasks = tasks
               .Where(task => task.User.UserId == userId)         // задачи этого пользователя
               .Where(task => task.State == ToDoItemState.Active) // только активные задачи
               .ToList();                                        // в виде списка
 
-            return activeTasks;
+            return Task.FromResult<IReadOnlyList<ToDoItem>>(activeTasks);
         }
 
-        public IReadOnlyList<ToDoItem> GetAllByUserId(Guid userId)
+        public Task<IReadOnlyList<ToDoItem>> GetAllByUserId(Guid userId, CancellationToken ct)
         {
             var allTasks = tasks
             .Where(task => task.User.UserId == userId)         // задачи этого пользователя
             .ToList();                                        // в виде списка
 
-            return allTasks;
+            return Task.FromResult<IReadOnlyList<ToDoItem>>(allTasks);
         }
 
-        public void Update(ToDoItem item)
+        public Task Update(ToDoItem item, CancellationToken ct)
         {
             var idx = tasks.FindIndex(x=>x.Id==item.Id);
             tasks[idx] = item;
+            return Task.CompletedTask;
         }
 
-        IReadOnlyList<ToDoItem> IToDoRepository.Find(Guid userId, Func<ToDoItem, bool> predicate)
+        Task <IReadOnlyList<ToDoItem>> IToDoRepository.Find(Guid userId, Func<ToDoItem, bool> predicate, CancellationToken ct)
         {
             var FindTasks = tasks
             .Where(task => task.User.UserId == userId)         // задачи этого пользователя
             .Where(task => predicate(task))                   //которые удовлетворяют предикату
             .ToList();                                        // в виде списка
 
-            return FindTasks;
+            return Task.FromResult<IReadOnlyList<ToDoItem>>(FindTasks);
         }
     }
 }

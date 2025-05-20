@@ -27,7 +27,12 @@ C:\Users\weare\source\repos\Niennel\Telegram_bot\BotMain\obj\Debug\net8.0\refint
 C:\Users\weare\source\repos\Niennel\Telegram_bot\BotMain\obj\Debug\net8.0\BotMain.pdb
 C:\Users\weare\source\repos\Niennel\Telegram_bot\BotMain\obj\Debug\net8.0\BotMain.genruntimeconfig.cache
 C:\Users\weare\source\repos\Niennel\Telegram_bot\BotMain\obj\Debug\net8.0\ref\BotMain.dll
-C:\Users\weare\source\repos\Niennel\Telegram_bot\BotMain\bin\Debug\net8.0\Otus.ToDoList.ConsoleBot.dll
-C:\Users\weare\source\repos\Niennel\Telegram_bot\BotMain\bin\Debug\net8.0\Otus.ToDoList.ConsoleBot.pdb
 C:\Users\weare\source\repos\Niennel\Telegram_bot\BotMain\obj\Debug\net8.0\BotMain.csproj.AssemblyReference.cache
 C:\Users\weare\source\repos\Niennel\Telegram_bot\BotMain\obj\Debug\net8.0\BotMain.csproj.Up2Date
+C:\Users\weare\source\repos\Niennel\Telegram_bot\BotMain\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\weare\source\repos\Niennel\Telegram_bot\BotMain\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\weare\source\repos\Niennel\Telegram_bot\BotMain\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\weare\source\repos\Niennel\Telegram_bot\BotMain\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\weare\source\repos\Niennel\Telegram_bot\BotMain\bin\Debug\net8.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+C:\Users\weare\source\repos\Niennel\Telegram_bot\BotMain\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+C:\Users\weare\source\repos\Niennel\Telegram_bot\BotMain\bin\Debug\net8.0\Telegram.Bot.dll
