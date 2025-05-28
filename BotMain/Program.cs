@@ -37,14 +37,23 @@ namespace BotMain
             Console.InputEncoding = Encoding.Unicode;
             Console.OutputEncoding = Encoding.Unicode;
 
-            IUserRepository userRepository = new InMemoryUserRepository();
-            IToDoRepository toDoRepository = new InMemoryToDoRepository();
+            // Получение пути к папке данных приложения
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            // Создание подпапки для ZiLong
+            string appFolder = Path.Combine(appDataPath, "ZiLong");
+
+            ////Каталоги для задач и пользователей
+            //string ToDoFolder = Path.Combine(appFolder, "ToDoFolder");
+            //string UserFolder = Path.Combine(appFolder, "UserFolder");
+
+
+            IUserRepository userRepository = new FileUserRepository(appFolder);
+            IToDoRepository toDoRepository = new FileToDoRepository(appFolder);
             IToDoReportService toDoReportService = new ToDoReportService(toDoRepository);
             var userService = new UserService(userRepository);
             var toDoService = new ToDoService(toDoRepository);
             var handler = new UpdateHandler(userService, toDoService, toDoReportService);
-
-            
+                        
             try
             {
                 string token = Environment.GetEnvironmentVariable("TELEGRAM_BOT_TOKEN_EX1", EnvironmentVariableTarget.User);
