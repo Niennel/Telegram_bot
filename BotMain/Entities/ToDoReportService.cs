@@ -9,10 +9,11 @@ namespace BotMain.Entities
 {
     class ToDoReportService(IToDoRepository toDoRepository) : IToDoReportService
     {
-       public (int total, int completed, int active, DateTime generatedAt) GetUserStats(Guid userId)
+       public async Task<(int total, int completed, int active, DateTime generatedAt)> GetUserStats(Guid userId, CancellationToken ct)
         {
-            var total = toDoRepository.GetAllByUserId(userId).Count();
-            var active = toDoRepository.CountActive(userId);
+            var _total = await toDoRepository.GetAllByUserId(userId,  ct);
+            var total = _total.Count;
+            var active = await toDoRepository.CountActive(userId, ct);
             var completed = total - active;
 
             return (total,completed,active, generatedAt: DateTime.Now);
