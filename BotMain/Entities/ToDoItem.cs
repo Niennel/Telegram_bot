@@ -22,6 +22,7 @@ namespace BotMain.Entities
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public ToDoItemState State { get; set; } = ToDoItemState.Active;
         public DateTime? StateChangedAt { get; set; } = DateTime.UtcNow;
+        public DateTime? Deadline { get; set; }
 
     }
 }
