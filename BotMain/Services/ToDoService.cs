@@ -38,11 +38,8 @@ namespace BotMain.Services
             if (task_in.Length > Program.maxTaskLength)
                 throw new TaskLengthLimitException(task_in.Length, Program.maxTaskLength);
 
-            var newTask = new ToDoItem(task_in, user)
-            {
-                Deadline = deadline
-            };
-
+            var newTask = new ToDoItem(task_in, user, deadline);
+            
             //проверка на наличие
             if (await  tasks.ExistsByName(user.UserId, name, ct))
                 throw new DuplicateTaskException(task_in);

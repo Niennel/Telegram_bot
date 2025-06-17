@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BotMain.Entities
 {
-    public class ToDoItem (string name, ToDoUser  user)
+    public class ToDoItem (string name, ToDoUser  user, DateTime? deadline)
     {
         public enum ToDoItemState
         {

@@ -25,10 +25,6 @@ namespace BotMain.Scenarios
 
         bool IScenario.CanHandle(ScenarioType scenario) => scenario == ScenarioType.AddTask;
 
-        //Task<ScenarioResult> IScenario.HandleMessageAsync(ITelegramBotClient bot, ScenarioContext context, Update update, CancellationToken ct)
-        //{
-        //    throw new NotImplementedException();
-        //}
         public async Task<ScenarioResult> HandleMessageAsync(
         ITelegramBotClient botClient,
         ScenarioContext context,
