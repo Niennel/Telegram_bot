@@ -35,6 +35,7 @@ namespace BotMain.Scenarios
         Update update,
         CancellationToken ct)
         {
+            string textToDo = update.Message.Text;
             switch (context.CurrentStep)
             {
                 case null:
@@ -48,8 +49,22 @@ namespace BotMain.Scenarios
                             cancellationToken: ct);
                         return ScenarioResult.Completed;
                     }
-
                     context.Data["User"] = user;
+                    
+                    
+                    if (textToDo.Contains(" "))
+                    { 
+                        textToDo = string.Join(" ", update.Message.Text.Split(" ")[1..]);
+                        context.Data["Name"] = textToDo;
+                        context.CurrentStep = "Deadline";
+                          await botClient.SendMessage(
+                          update.Message.Chat.Id,
+                          "Введите срок выполнения (дд.ММ.гггг) или нажмите /skip:",
+                          cancellationToken: ct);
+                        return ScenarioResult.Transition;
+                    }
+
+                    
                     context.CurrentStep = "Name";
 
                     await botClient.SendMessage(
@@ -61,7 +76,8 @@ namespace BotMain.Scenarios
 
                 case "Name":
                     // Шаг 2: Сохранение названия и запрос даты
-                    context.Data["Name"] = update.Message.Text;
+                    
+                    context.Data["Name"] = textToDo;
                     context.CurrentStep = "Deadline";
 
                     await botClient.SendMessage(

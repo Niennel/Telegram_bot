@@ -123,7 +123,6 @@ namespace BotMain
                     await Find(botClient, update, textToDo, ct);
                 }
                 OnHandleUpdateCompleted?.Invoke(update.Message.Text);
-                //await botClient.SendMessage(update.Message.Chat, "Введите команду", ct);
             }
             catch (ArgumentException e)
             {
@@ -150,10 +149,7 @@ namespace BotMain
                 await HandleErrorAsync(botClient, e, hes, ct);
                 //throw;
             }
-            //finally
-            //{
-               
-            //}
+            
         }
         //static void Info(int x, DateOnly d)
         //{
@@ -195,12 +191,12 @@ namespace BotMain
             }
             else
             {
-                await contextRepository.SetContext(context.UserId, context, ct);
+              await contextRepository.SetContext(context.UserId, context, ct);
             }
         }
         public async Task Info(ITelegramBotClient botClient, Update update, int x, DateOnly d, CancellationToken cts)
         {
-            await botClient.SendMessage(update.Message.Chat, $"Я {x} версия от {d} бота помошника\n", cancellationToken: cts);
+            await botClient.SendMessage(update.Message.Chat, $"Я {x} версия от {d} бота помошника\n", replyMarkup: await GetKeyboardForUser(botClient, update, cts), cancellationToken: cts);
         }
         //Регистрация пользователя
         private async Task Start(ITelegramBotClient botClient, Update update, CancellationToken cts)
@@ -249,7 +245,7 @@ namespace BotMain
             {
                 Help_text = Help_text + new_addtask;
             }
-            await botClient.SendMessage(update.Message.Chat, Help_text, cancellationToken: cts);
+            await botClient.SendMessage(update.Message.Chat, Help_text, replyMarkup: await GetKeyboardForUser(botClient, update, cts), cancellationToken: cts);
 
         }
         //Добавление задачи
@@ -257,13 +253,7 @@ namespace BotMain
         {
             // Создаем контекст для сценария добавления задачи
             var context = new ScenarioContext(ScenarioType.AddTask);
-
-            // Если сразу передано название задачи, сохраняем его в контексте
-            if (!string.IsNullOrEmpty(name))
-            {
-                context.CurrentStep = "Name";
-                context.Data["Name"] = name;
-            }
+              
             await _scenarioContext.SetContext(update.Message.From.Id, context, cts);
             // Начинаем обработку сценария
             await ProcessScenario(botClient,context, update, cts);
@@ -273,7 +263,7 @@ namespace BotMain
         {
             if (await _userService.GetUser(update.Message.From.Id, cts) == null)
             {
-                await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", cancellationToken: cts);
+                await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", replyMarkup: await GetKeyboardForUser(botClient, update, cts), cancellationToken: cts);
                 return;
             }
             var user = await _userService.GetUser(update.Message.From.Id, cts);
@@ -291,7 +281,7 @@ namespace BotMain
                 _ = response.AppendLine($"{task.Name}\\-\\-\\-{FormatDateTime(task.CreatedAt)}\\-\\-\\-`{task.Id}`");//{task.Name}\\- {task.CreatedAt}\\- 
             }
 
-            await botClient.SendMessage(update.Message.Chat, text:response.ToString(), parseMode: ParseMode.MarkdownV2, cancellationToken: cts);
+            await botClient.SendMessage(update.Message.Chat, text:response.ToString(), parseMode: ParseMode.MarkdownV2, replyMarkup: await GetKeyboardForUser(botClient, update, cts), cancellationToken: cts);
         }
         //Просмотр всех задач
         private async Task ShowAlltasks(ITelegramBotClient botClient, Update update, CancellationToken cts)
@@ -315,7 +305,7 @@ namespace BotMain
             {
                 _ = response.AppendLine($"\\({task.State}\\)\\-\\-\\-{task.Name}\\-\\-\\-{FormatDateTime(task.CreatedAt)}\\-\\-\\-`{task.Id}`");//{task.Name}\\- {task.CreatedAt}\\- 
             }
-            await botClient.SendMessage(update.Message.Chat, text: response.ToString(), parseMode: ParseMode.MarkdownV2, cancellationToken: cts);
+            await botClient.SendMessage(update.Message.Chat, text: response.ToString(), parseMode: ParseMode.MarkdownV2, replyMarkup: await GetKeyboardForUser(botClient, update, cts), cancellationToken: cts);
         }
         //Удаление задач
         private async Task Removetask(ITelegramBotClient botClient, Update update, string id, CancellationToken cts)
@@ -323,14 +313,14 @@ namespace BotMain
             var user = await _userService.GetUser(update.Message.From.Id, cts);
             if (user == null)
             {
-                await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", cancellationToken: cts);
+                await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", replyMarkup: await GetKeyboardForUser(botClient, update, cts), cancellationToken: cts);
                 return;
             }
 
             var _tasks = await _toDoService.GetAllByUserId(user.UserId, cts);
             if (_tasks.Count == 0)
             {
-                await botClient.SendMessage(update.Message.Chat, $"Ваш список задач пуст", cancellationToken: cts);
+                await botClient.SendMessage(update.Message.Chat, $"Ваш список задач пуст", replyMarkup: await GetKeyboardForUser(botClient, update, cts), cancellationToken: cts);
                 return;
             }
 
@@ -343,14 +333,14 @@ namespace BotMain
               .ToList();
             if (taskToRemove.Count == 0)
             {
-                await botClient.SendMessage(update.Message.Chat, $"Такой задачи нет", cancellationToken: cts);
+                await botClient.SendMessage(update.Message.Chat, $"Такой задачи нет", replyMarkup: await GetKeyboardForUser(botClient, update, cts), cancellationToken: cts);
                 return;
             }
             await _toDoService.Delete(numberToRemove, cts);
 
             foreach (var task in _tasks.Where(task => task.Id == numberToRemove))
             {
-                await botClient.SendMessage(update.Message.Chat, $"Задача {task.Name} удалена", cancellationToken: cts);
+                await botClient.SendMessage(update.Message.Chat, $"Задача {task.Name} удалена", replyMarkup: await GetKeyboardForUser(botClient, update, cts), cancellationToken: cts);
             }
 
 
@@ -360,14 +350,14 @@ namespace BotMain
         {
             if (await _userService.GetUser(update.Message.From.Id, cts) == null)
             {
-                await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", cancellationToken: cts);
+                await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", replyMarkup: await GetKeyboardForUser(botClient, update, cts), cancellationToken: cts);
                 return;
             }
             var user = await _userService.GetUser(update.Message.From.Id, cts);
             var _tasks = await _toDoService.GetActiveByUserId(user.UserId, cts);
             if (_tasks.Count == 0)
             {
-                await botClient.SendMessage(update.Message.Chat, $"Ваш список задач пуст", cancellationToken: cts);
+                await botClient.SendMessage(update.Message.Chat, $"Ваш список задач пуст", replyMarkup: await GetKeyboardForUser(botClient, update, cts), cancellationToken: cts);
                 return;
             }
 
@@ -380,14 +370,14 @@ namespace BotMain
               .ToList();
             if (taskToRemove.Count == 0)
             {
-                await botClient.SendMessage(update.Message.Chat, $"Такой задачи нет", cancellationToken: cts);
+                await botClient.SendMessage(update.Message.Chat, $"Такой задачи нет", replyMarkup: await GetKeyboardForUser(botClient, update, cts), cancellationToken: cts);
                 return;
             }
             await _toDoService.MarkCompleted(numberToRemove, cts);
 
             foreach (var task in _tasks.Where(task => task.Id == numberToRemove))
             {
-                await botClient.SendMessage(update.Message.Chat, $"Задача {task.Name} завершена", cancellationToken: cts);
+                await botClient.SendMessage(update.Message.Chat, $"Задача {task.Name} завершена", replyMarkup: await GetKeyboardForUser(botClient, update, cts), cancellationToken: cts);
             }
 
         }
@@ -396,13 +386,13 @@ namespace BotMain
             //если пользователь не зарегистрирован, то ничего не происходит при вызове
             if (await _userService.GetUser(update.Message.From.Id, cts) == null)
             {
-                await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", cancellationToken: cts);
+                await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", replyMarkup: await GetKeyboardForUser(botClient, update, cts), cancellationToken: cts);
                 return;
             }
             var user = await _userService.GetUser(update.Message.From.Id, cts);
             var tuple = await toDoReport.GetUserStats(user!.UserId, cts);
             await botClient.SendMessage(update.Message.Chat,
-            $"Статистика по задачам на {tuple.generatedAt}. Всего: {tuple.total}; Завершенных: {tuple.completed}; Активных: {tuple.active};", cancellationToken: cts);
+            $"Статистика по задачам на {tuple.generatedAt}. Всего: {tuple.total}; Завершенных: {tuple.completed}; Активных: {tuple.active};", replyMarkup: await GetKeyboardForUser(botClient, update, cts), cancellationToken: cts);
         }
         private async Task Find(ITelegramBotClient botClient, Update update, string pref, CancellationToken cts)
         {
@@ -410,13 +400,13 @@ namespace BotMain
 
             if (user == null)
             {
-                await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", cancellationToken: cts);
+                await botClient.SendMessage(update.Message.Chat, $"Команда не доступна", replyMarkup: await GetKeyboardForUser(botClient, update, cts), cancellationToken: cts);
                 return;
             }
             var _tasks = await _toDoService.GetAllByUserId(user.UserId, cts);
             if (_tasks.Count == 0)
             {
-                await botClient.SendMessage(update.Message.Chat, $"Ваш список задач пуст", cancellationToken: cts);
+                await botClient.SendMessage(update.Message.Chat, $"Ваш список задач пуст", replyMarkup: await GetKeyboardForUser(botClient, update, cts), cancellationToken: cts);
                 return;
             }
 
@@ -424,13 +414,13 @@ namespace BotMain
 
             if (_findtasks.Count == 0)
             {
-                await botClient.SendMessage(update.Message.Chat, $"По заданному префиксу ничего не найдено", cancellationToken: cts);
+                await botClient.SendMessage(update.Message.Chat, $"По заданному префиксу ничего не найдено", replyMarkup: await GetKeyboardForUser(botClient, update, cts), cancellationToken: cts);
                 return;
             }
 
             foreach (var task in _findtasks)
             {
-                await botClient.SendMessage(update.Message.Chat, $"{task.Name}- {task.CreatedAt}- {task.Id}", cancellationToken: cts);
+                await botClient.SendMessage(update.Message.Chat, $"{task.Name}- {task.CreatedAt}- {task.Id}", replyMarkup: await GetKeyboardForUser(botClient, update, cts), cancellationToken: cts);
             }
 
 
@@ -459,7 +449,7 @@ namespace BotMain
             })
             {
                 ResizeKeyboard = true,
-                OneTimeKeyboard = true
+               // OneTimeKeyboard = true
             };
         }
         private  async Task <ReplyKeyboardMarkup> GetKeyboardForUser(ITelegramBotClient botClient, Update update, CancellationToken cts)
@@ -472,12 +462,12 @@ namespace BotMain
                     ResizeKeyboard = true
                 };
             }
-            // Проверяем активный сценарий
-            //var context = await contextRepository.GetContext(update.Message.From.Id, cts);
-            //if (context != null)
-            //{
-            //    return GetCancelKeyboard();
-            //}
+            //Проверяем активный сценарий
+           var context = await contextRepository.GetContext(update.Message.From.Id, cts);
+            if (context != null)
+            {
+                return GetCancelKeyboard();
+            }
 
             // Стандартная клавиатура для зарегистрированных пользователей
             return new ReplyKeyboardMarkup(new[]
