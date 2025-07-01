@@ -252,7 +252,7 @@ namespace BotMain
         private async Task Addtask(ITelegramBotClient botClient, Update update, string name, CancellationToken cts)
         {
             // Создаем контекст для сценария добавления задачи
-            var context = new ScenarioContext(ScenarioType.AddTask);
+            var context = new ScenarioContext(ScenarioType.AddTask, update.Message.From.Id);
               
             await _scenarioContext.SetContext(update.Message.From.Id, context, cts);
             // Начинаем обработку сценария
