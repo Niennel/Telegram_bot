@@ -24,7 +24,7 @@ namespace BotMain.Services
         }
 
         //private readonly List<ToDoItem> tasks = new();
-        public async Task<ToDoItem > Add(ToDoUser user, string name, CancellationToken ct)
+        public async Task<ToDoItem > Add(ToDoUser user, string name, DateTime? deadline, CancellationToken ct)
         {
             //проверка на количество
             var count = await tasks.CountActive(user.UserId, ct);
@@ -37,9 +37,9 @@ namespace BotMain.Services
             //проверка на длинну
             if (task_in.Length > Program.maxTaskLength)
                 throw new TaskLengthLimitException(task_in.Length, Program.maxTaskLength);
-           
-            var newTask = new ToDoItem(task_in,user);
 
+            var newTask = new ToDoItem(task_in, user, deadline);
+            
             //проверка на наличие
             if (await  tasks.ExistsByName(user.UserId, name, ct))
                 throw new DuplicateTaskException(task_in);

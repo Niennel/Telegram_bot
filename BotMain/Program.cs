@@ -14,6 +14,7 @@ using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using BotMain.Scenarios;
 
 namespace BotMain
 {
@@ -50,10 +51,24 @@ namespace BotMain
             IUserRepository userRepository = new FileUserRepository(appFolder);
             IToDoRepository toDoRepository = new FileToDoRepository(appFolder);
             IToDoReportService toDoReportService = new ToDoReportService(toDoRepository);
+            InMemoryScenarioContextRepository scenarioContext = new InMemoryScenarioContextRepository();
+         
+
+
             var userService = new UserService(userRepository);
             var toDoService = new ToDoService(toDoRepository);
-            var handler = new UpdateHandler(userService, toDoService, toDoReportService);
-                        
+            var scenarios = new List<IScenario>
+             {
+                 new AddTaskScenario(userService, toDoService)
+             };
+
+            var handler = new UpdateHandler(
+                userService,
+                toDoService,
+                toDoReportService,
+                scenarios,  // Передаем как IEnumerable
+                scenarioContext);
+
             try
             {
                 string token = Environment.GetEnvironmentVariable("TELEGRAM_BOT_TOKEN_EX1", EnvironmentVariableTarget.User);
