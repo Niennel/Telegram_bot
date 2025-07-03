@@ -42,7 +42,8 @@ namespace BotMain
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             // Создание подпапки для ZiLong
             string appFolder = Path.Combine(appDataPath, "ZiLong");
-
+            // Создание каталога для списков задач
+            string appListFolder = Path.Combine(appFolder);
             ////Каталоги для задач и пользователей
             //string ToDoFolder = Path.Combine(appFolder, "ToDoFolder");
             //string UserFolder = Path.Combine(appFolder, "UserFolder");
@@ -52,7 +53,8 @@ namespace BotMain
             IToDoRepository toDoRepository = new FileToDoRepository(appFolder);
             IToDoReportService toDoReportService = new ToDoReportService(toDoRepository);
             InMemoryScenarioContextRepository scenarioContext = new InMemoryScenarioContextRepository();
-         
+            IToDoListRepository toDoListRepository = new FileToDoListRepository(appFolder);
+            IToDoListService toDoListService = new ToDoListService(toDoListRepository);
 
 
             var userService = new UserService(userRepository);
@@ -62,12 +64,14 @@ namespace BotMain
                  new AddTaskScenario(userService, toDoService)
              };
 
+
             var handler = new UpdateHandler(
                 userService,
                 toDoService,
                 toDoReportService,
                 scenarios,  // Передаем как IEnumerable
-                scenarioContext);
+                scenarioContext,
+                toDoListService);
 
             try
             {
@@ -83,7 +87,7 @@ namespace BotMain
 
                 var receiverOptions = new ReceiverOptions
                 {
-                    AllowedUpdates = [UpdateType.Message],
+                    AllowedUpdates = new[] { UpdateType.Message, UpdateType.CallbackQuery },
                     DropPendingUpdates = true
                 };
 

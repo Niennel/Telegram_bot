@@ -16,5 +16,6 @@ namespace BotMain.Services
         Task MarkCompleted(Guid id, CancellationToken ct);
         Task Delete(Guid id, CancellationToken ct);
         Task<IReadOnlyList<ToDoItem>> Find(ToDoUser user, string namePrefix, CancellationToken ct);
+        Task<IReadOnlyList<ToDoItem>> GetByUserIdAndList(Guid userId, Guid? listId, CancellationToken ct);
     }
 }

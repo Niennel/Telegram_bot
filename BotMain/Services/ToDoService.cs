@@ -11,6 +11,7 @@ using static BotMain.Entities.ToDoItem;
 using BotMain.Exceptions;
 using BotMain.Entities;
 
+
 namespace BotMain.Services
 {
     class ToDoService(Core.DataAccess.IToDoRepository tasks) : IToDoService
@@ -72,6 +73,17 @@ namespace BotMain.Services
                 task.StateChangedAt = DateTime.Now;
 
             await tasks.Update(task, ct);
+        }
+
+        public async Task<IReadOnlyList<ToDoItem>> GetByUserIdAndList(Guid userId, Guid? listId, CancellationToken ct)
+        {
+            if (!listId.HasValue)
+            {
+                return await tasks.GetAllByUserId(userId, ct);
+            }
+
+            var allUserItems = await tasks.GetAllByUserId(userId, ct);
+            return allUserItems.Where(item => item.List.Id == listId.Value).ToList();
         }
     }
 }

@@ -23,6 +23,7 @@ namespace BotMain.Entities
         public ToDoItemState State { get; set; } = ToDoItemState.Active;
         public DateTime? StateChangedAt { get; set; } = DateTime.UtcNow;
         public DateTime? Deadline { get; set; }
+        public ToDoList? List { get; set; }
 
     }
 }

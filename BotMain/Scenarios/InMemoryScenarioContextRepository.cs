@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace BotMain.Scenarios
 {
     internal class InMemoryScenarioContextRepository : IScenarioContextRepository
     {
-        private readonly Dictionary<long, ScenarioContext> _Scenario = [];
+        private readonly ConcurrentDictionary<long, ScenarioContext> _Scenario = new();
         public Task<ScenarioContext?> GetContext(long userId, CancellationToken ct)
         {
             if (_Scenario.TryGetValue(userId, out var context))
@@ -22,7 +23,7 @@ namespace BotMain.Scenarios
         {
             if (_Scenario.ContainsKey(userId))
             {
-                _Scenario.Remove(userId);
+                _Scenario.TryRemove(userId, out _);
             }
             return Task.CompletedTask;
         }
